@@ -37,7 +37,7 @@ class App {
     }
     
     public static function run($callbackRun){        
-        Autoload::register();
+        
         call_user_func($callbackRun);
         \Phacil\Routing\Router::run();
     }

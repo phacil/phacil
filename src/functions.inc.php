@@ -59,3 +59,7 @@ function str_replace_first($search, $replace, $subject){
     }
     return false;
 }
+
+function from_file_json($file){
+    return json_decode(file_get_contents($file .'.json'), true);
+}

@@ -1,14 +1,16 @@
 <?php
 namespace Phacil\Integration;
 
+use Phacil\Environment\App;
+
 class Integration {
         
     protected static $dbConfigs = array();
-    public static $dbConfig = 'default';    
+    public static $dbConfig = 'default';
     
     protected static function __setDbConfig($var = 'default'){
         
-        $dbConfig = \Database::$$var;
+        $dbConfig = App::get('datasources')[$$var];
         
         return new QueryBuilder($dbConfig);
     }
