@@ -8,10 +8,10 @@ class View{
     protected static $layout = 'default';
     protected static $viewsPath = '';
     
-    protected static $vars = array();
+    protected static $vars = [];
     
     public static function setName($value = null){
-        self::$name = $value;
+        self::$name = filter_var($value, FILTER_SANITIZE_STRING);
     }
     
     public static function getName(){
@@ -19,7 +19,7 @@ class View{
     }
     
     public static function setLayout($value = null){
-        self::$layout = $value;
+        self::$layout = filter_var($value, FILTER_SANITIZE_STRING);
     }
     
     public static function getlayout(){
@@ -27,7 +27,7 @@ class View{
     }
     
     public static function setViewsPath($value = null){
-        self::$viewsPath = $value;
+        self::$viewsPath = filter_var($value, FILTER_SANITIZE_STRING);
     }
     
     public static function getViewsPath(){
@@ -35,7 +35,8 @@ class View{
     }
 
     public static function set($var, $value = null){
-        self::$vars[$var] = $value;
+        self::$vars[filter_var($var, FILTER_SANITIZE_STRING)] 
+                = filter_var($value, FILTER_DEFAULT);
     }
     
     public static function get($var){

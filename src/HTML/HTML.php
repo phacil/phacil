@@ -11,10 +11,10 @@ namespace Phacil\HTML;
 
 class HTML {
         
-    public static function __callStatic($name, $arguments=array()) {
+    public static function __callStatic($name, $arguments=[]) {
         if(empty($arguments)){$arguments[0]='';}
         $elementObject = new HTMLElement($name);
-        call_user_func_array(array($elementObject, 'content'), $arguments);
+        call_user_func_array([$elementObject, 'content'], $arguments);
         //$elementObject->setText($arguments[0],$arguments[1]);
         return $elementObject;
     }
@@ -37,9 +37,9 @@ class HTML {
     Especial Tags Function    
      */ 
     
-    public static function select($opcoes = array(), $selected = array(), $empty = false){
+    public static function select($opcoes = [], $selected = [], $empty = false){
         
-        $selected = is_array($selected)?$selected:array($selected);
+        $selected = is_array($selected)?$selected:[$selected];
         
         $elementObject = new HTMLElement('select');
         $elementObject->set('text', '');    
@@ -88,23 +88,23 @@ class HTML {
         return $elementObject;
     }
     
-    public static function radio($list = array(), $checked = array()){
+    public static function radio($list = [], $checked = []){
         
         $elementObject = new HTMLElement('radio');
         $elementObject->list = $list;
-        $elementObject->listChecked = is_array($checked)?$checked:array($checked);
+        $elementObject->listChecked = is_array($checked)?$checked:[$checked];
         return $elementObject;
     }
     
-    public static function checkbox($list = array(), $checked = array()){
+    public static function checkbox($list = [], $checked = []){
       
         $elementObject = new HTMLElement('checkbox');
         $elementObject->list = $list;
-        $elementObject->listChecked = is_array($checked)?$checked:array($checked);
+        $elementObject->listChecked = is_array($checked)?$checked:[$checked];
         return $elementObject;
     }
     
-    public static function style($styles = array(), $style = "<style>\n", $close = true){
+    public static function style($styles = [], $style = "<style>\n", $close = true){
         
         foreach($styles as $tag => $attrs){
             $style .= $tag . '{' . "\n";

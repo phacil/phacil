@@ -4,7 +4,7 @@ namespace Phacil\HTML;
 
 class Form extends HTML {
     
-    public static function __callStatic($name, $arguments=array()) {
+    public static function __callStatic($name, $arguments=[]) {
         if(empty($arguments)){$arguments[0]='';}
         $elementObject = new FormElement($name);
         call_user_func_array(array($elementObject, 'setText'), $arguments);

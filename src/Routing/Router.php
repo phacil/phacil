@@ -9,7 +9,7 @@ class Router {
     
     protected static $requestUri = null;
 
-    protected static $routes = array();
+    protected static $routes = [];
     
     protected static $mapPrefix = '/';
     
@@ -31,7 +31,7 @@ class Router {
         
     }
     
-    protected static function __combineCallbackMatches($callback = array(), $matches = array()) {
+    protected static function __combineCallbackMatches($callback = [], $matches = []) {
         
         if(count($matches) > 1 && !is_callable($callback)){
             $lastMatch = end($matches);
@@ -53,8 +53,8 @@ class Router {
         return false;
     }
     
-    protected static function __diffParamsArgs($params = array()){
-        $_params = $_args = array();
+    protected static function __diffParamsArgs($params = []){
+        $_params = $_args = [];
         
         $last = array_last($params);
         if(strpos($last, '&')){
@@ -76,7 +76,7 @@ class Router {
 
     protected static function __defineModuleControllerAction($match = null){
         
-        $parts = $newparts = array();
+        $parts = $newparts = [];
         
         if(!is_array($match)){
             $parts = explode('/', ltrim($match, '/'));
@@ -125,7 +125,7 @@ class Router {
         Request::setParams($_params);
         Request::setArgs($_args);
         //pr(Request::info());       
-        return array($newparts, $_params);
+        return [$newparts, $_params];
     }   
     
     protected static function __discoverController($controller){
@@ -143,11 +143,11 @@ class Router {
         return $params;
     }
     //
-    protected static function __executeCallback($callback, $params = array()){
+    protected static function __executeCallback($callback, $params = []){
         return call_user_func_array($callback, self::__compareArgs($callback, $params));
     }
     
-    protected static function __render($callback, $params = array()){
+    protected static function __render($callback, $params = []){
 
 	$controllerPath = '\\' . BUSINESS_NAMESAPACE . "\\" . $callback[0] . '\\' . Request::info('controller');
                 //pr($callback[0]); exit;
@@ -161,11 +161,8 @@ class Router {
         Theme::includeLayoutViewOnTheme(View::getLayout(), View::getViewsPath() , View::getName(), View::getVars());
     }
     
-    protected static function __renderOrExecute($callback = array(), $namedParams = array(), $matches = array()) {
+    protected static function __renderOrExecute($callback = [], $namedParams = [], $matches = []) {
        
-//        if(empty($callback)){
-//            list($callback, $params) = self::__defineModuleControllerAction($matches[1]);
-//        }else 
         if(is_array($callback)){
             list($callback, $params) = self::__defineModuleControllerAction($callback);
             return self::__render($callback, $params);

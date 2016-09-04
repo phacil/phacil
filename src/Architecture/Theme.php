@@ -1,7 +1,7 @@
 <?php
-
 namespace Phacil\Architecture;
 
+use Phacil\HTML\HTML as Html;
 class Theme{
     
     protected static $name = 'default';
@@ -13,7 +13,7 @@ class Theme{
         	
     public static function loadView($viewPath, $view, $vars){
        
-        return \Phacil\HTML\HTML::buffer(function() use ($viewPath, $view, $vars){
+        return Html::buffer(function() use ($viewPath, $view, $vars){
                 foreach($vars as $var => $value){
                 if(!isset($$var)){
                     $$var = $value;  
@@ -53,7 +53,7 @@ class Theme{
             
             $asset = ($asset[0] == '/')?$asset: '/css/' . $asset;
             
-            $assets .= \Phacil\HTML\HTML::link()->href(THEMES_URL. self::$name . '/' . self::$asset_dir . $asset . '.css')
+            $assets .= Html::link()->href(THEMES_URL. self::$name . '/' . self::$asset_dir . $asset . '.css')
                                     ->rel('stylesheet')
                                     ->type('text/css')
                                     ->output(); 
@@ -74,7 +74,7 @@ class Theme{
             if(empty($asset)) { continue;}
             
             $asset = ($asset[0] == '/')?$asset: '/js/' . $asset;
-            $assets .= \Phacil\HTML\HTML::script()->src(THEMES_URL. self::$name . '/' . self::$asset_dir . $asset . '.js')
+            $assets .= Html::script()->src(THEMES_URL. self::$name . '/' . self::$asset_dir . $asset . '.js')
                     ->type('text/javascript')
                     ->output(); 
             $assets .= "\n";
@@ -83,6 +83,6 @@ class Theme{
     }
     
     public static function image($param = '') {
-        return \Phacil\HTML\HTML::img()->src(THEMES_URL. self::$name . '/' . self::$asset_dir . '/images/' . $param);
+        return Html::img()->src(THEMES_URL. self::$name . '/' . self::$asset_dir . '/images/' . $param);
     }
 }

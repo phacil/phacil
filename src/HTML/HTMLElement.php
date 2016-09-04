@@ -4,7 +4,6 @@
 * Adapted by: Alisson Nascimento <alisson.sa.nascimento@gmail.com>
 *  
 */
-
 namespace Phacil\HTML;
 
 class HTMLElement{
@@ -15,11 +14,11 @@ class HTMLElement{
     /** 
         @var $attributes
     */
-    public $attributes = array();
+    public $attributes = [];
     /** 
         @var $self_closers
     */
-    public $self_closers =  array('input','img','hr','br','meta','link');
+    public $self_closers =  ['input','img','hr','br','meta','link'];
     /** 
         @var $style
     */
@@ -63,7 +62,7 @@ class HTMLElement{
         }else{
             $texts = $text;
         }
-        $o = array();
+        $o = [];
         
         foreach ($texts as $t){
             $o[] = (@get_class($t) == __class__)?$t->build():$t;
@@ -90,7 +89,7 @@ class HTMLElement{
 
     /* clear */
     public function clear(){
-        $this->attributes = array();
+        $this->attributes = [];
     }
 
     /* inject */
@@ -112,7 +111,7 @@ class HTMLElement{
             {
                     foreach($this->attributes as $key=>$value)
                     {
-                            if(!in_array($key, array('text'))) { $build.= ' '.$key.'="'.$value.'"'; }
+                            if(!in_array($key, ['text'])) { $build.= ' '.$key.'="'.$value.'"'; }
                     }
             }
 
@@ -133,7 +132,7 @@ class HTMLElement{
     private function buildInputGroup($type){
             
             $this->type = 'input';
-            $inputs = array();
+            $inputs = [];
             $this->attributes['type'] = $type;
             
             $id = null;
@@ -162,14 +161,14 @@ class HTMLElement{
 	
     /* spit it out */
     public function output(){
-        if(in_array($this->type, array('radio', 'checkbox'))){
+        if(in_array($this->type, ['radio', 'checkbox'])){
             return $this->buildInputGroup($this->type);
         }
         return $this->build();
     }
         
     public function __toString() {
-        if(in_array($this->type, array('radio', 'checkbox'))){
+        if(in_array($this->type, ['radio', 'checkbox'])){
             return $this->buildInputGroup($this->type);
         }
         return $this->build();

@@ -1,15 +1,10 @@
 <?php
-/**
- * Description of Core
- *
- * @author alisson
- */
-
 namespace Phacil\Environment;
 
+use Phacil\Routing\Router as Router;
 class App {
     
-    protected static $__vars = array();
+    protected static $__vars = [];
     
     public static function set($var, $value = ''){
         self::$__vars[$var] = $value;
@@ -39,6 +34,6 @@ class App {
     public static function run($callbackRun){        
         
         call_user_func($callbackRun);
-        \Phacil\Routing\Router::run();
+        Router::run();
     }
 }

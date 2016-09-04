@@ -7,7 +7,7 @@ use Phacil\Routing\Request as Request;
 
 class FormElement extends HTMLElement{
     
-    private function _form($param = array()) {
+    private function _form($param = []) {
         
         $_fhead = null;
         
@@ -27,7 +27,7 @@ class FormElement extends HTMLElement{
         return $_parent_to_string . "\n" . $hidden_method . $_fhead . "\n";
     }
     
-    private function _form_close($param = array()){
+    private function _form_close($param = []){
         $end = null;
         if(!isset($this->attributes['fieldset']) || $this->attributes['fieldset'] !== false){
             $end .= "\n\t</fieldset>";
@@ -41,7 +41,7 @@ class FormElement extends HTMLElement{
     
     public function __toString() {        
         if(method_exists($this, "_$this->type")){
-            return call_user_func_array(array($this, "_$this->type"),array());
+            return call_user_func_array([$this, "_$this->type"],[]);
         }       
         return parent::__toString() ."\n";        
     }
