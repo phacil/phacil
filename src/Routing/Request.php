@@ -25,8 +25,7 @@ class Request{
                              'args'=>array() );
 
     public static function is($method){
-       // return  strtolower($method) == strtolower(self::getKeyServer('REQUEST_METHOD'));
-        return  strtolower($method) == self::$method;
+        return strtolower($method) == self::$method;
     }
     
     public static function info($key = null){
@@ -182,6 +181,7 @@ class Request{
                 }
             }
         }
-       return rtrim(ROOT_URL, '/') . join('/', $out);
+       
+       return ROOT_URL . join('/', $out);
     } 
 }

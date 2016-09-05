@@ -11,15 +11,15 @@ class QueryBuilderPagination extends QueryBuilder{
     }
     
     private function total_records(){
-		$this->limit = null;
-		$this->offset = null;
-		$this->orderBy = null;
-		$this->groupBy = null;
-		
-		$total_records = $this->select('COUNT(*) as count')->getAll(false, false);
+        $this->limit = null;
+        $this->offset = null;
+        $this->orderBy = null;
+        $this->groupBy = null;
+
+        $total_records = $this->select('COUNT(*) as count')->getAll(false, false);
         
         return $total_records->count;		
-	}
+    }
     
     public function get() {
         $args = Request::info('args');

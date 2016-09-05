@@ -35,8 +35,7 @@ class View{
     }
 
     public static function set($var, $value = null){
-        self::$vars[filter_var($var, FILTER_SANITIZE_STRING)] 
-                = filter_var($value, FILTER_DEFAULT);
+        self::$vars[filter_var($var, FILTER_SANITIZE_STRING)] = $value;
     }
     
     public static function get($var){

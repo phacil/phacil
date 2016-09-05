@@ -9,20 +9,27 @@ class Form extends HTML {
     public static function __callStatic($name, $arguments=[]) {
         if(empty($arguments)){$arguments[0]='';}
         $elementObject = new FormElement($name);
-        call_user_func_array(array($elementObject, 'setText'), $arguments);
-        //$elementObject->setText($arguments[0],$arguments[1]);
+        call_user_func_array([$elementObject, 'content'], $arguments);
         return $elementObject;
     }
     
-    public function open($form_title = null){
-        $form = new FormElement('form', true);
-        $form->set('text', $form_title);
-                
+    public static function open($content = null){
+               
+        if(is_callable($content) && $content instanceof \Closure){
+           $form = new FormElement('form');
+
+           call_user_func_array([$form, 'content'], [$content]);
+           return $form;
+        }else{
+            $form = new FormElement('form', true);
+            call_user_func_array([$form, 'content'], ['']);
+        }
+        //pr($form); exit;
+        
         return $form;
-        //return self::_begin('form');
     }
     
-    public function close(){
+    public static function close(){
         $form = new FormElement('form_close', true);
         $form->set('text', '');
                 

@@ -9,7 +9,7 @@ class Integration {
     public static $dbConfig = 'default';
     
     protected static function __setDbConfig($var = 'default'){        
-        $dbConfig = App::get('datasources')[$$var];        
+        $dbConfig = App::get('datasources')[$var];        
         return new QueryBuilder($dbConfig);
     }
     
