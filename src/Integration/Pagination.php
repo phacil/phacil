@@ -1,8 +1,10 @@
 <?php
 namespace Phacil\Integration;
+
 use Phacil\Routing\Request as Request;
 use Phacil\Routing\Route as Route;
 use Phacil\HTML\HTML as Html;
+use Phacil\Environment\App;
 
 class Pagination {
         
@@ -20,7 +22,7 @@ class Pagination {
     public static $list = array('tag'=>'li', 'class'=>'', 'classActive'=>'active', 'classDisabled'=>'disabled');    
    
     protected static function __setDbConfig($var = 'default'){
-        $dbConfig = $dbConfig = App::get('datasources')[$$var];
+        $dbConfig = App::get('datasources')[$$var];
         return new QueryBuilderPagination($dbConfig);
     }
     
