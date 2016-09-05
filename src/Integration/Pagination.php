@@ -20,7 +20,7 @@ class Pagination {
     public static $list = array('tag'=>'li', 'class'=>'', 'classActive'=>'active', 'classDisabled'=>'disabled');    
    
     protected static function __setDbConfig($var = 'default'){
-        $dbConfig = \Database::$$var;
+        $dbConfig = $dbConfig = App::get('datasources')[$$var];
         return new QueryBuilderPagination($dbConfig);
     }
     
