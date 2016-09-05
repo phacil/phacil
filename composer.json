@@ -15,7 +15,7 @@
         "symfony/var-dumper": "^3.1",
 		"phacil/html": "dev-master"
     },
-	"repositories": [
+    "repositories": [
         {
             "type": "vcs",
             "url":  "https://github.com/phacil/html.git"
