@@ -4,6 +4,8 @@ namespace Phacil\HTML;
 
 use Phacil\Routing\Route as Route;
 use Phacil\Routing\Request as Request;
+use Phacil\Html\HTML as HTML;
+use Phacil\Html\HTMLElement as HTMLElement;
 
 class FormElement extends HTMLElement{
     

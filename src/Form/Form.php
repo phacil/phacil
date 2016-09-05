@@ -1,6 +1,8 @@
 <?php
 
-namespace Phacil\HTML;
+namespace Phacil\Form;
+
+use Phacil\HTML\HTML as HTML;
 
 class Form extends HTML {
     

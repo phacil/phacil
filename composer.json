@@ -2,7 +2,7 @@
     "name": "phacil/phacil",
     "description": "Phacil PHP Framework",
     "license": "MIT",
-    "keywords": ["php, framework, phacil"],
+    "keywords": ["php", "framework", "phacil"],
     "authors": [
         {
             "name": "Alisson Nascimento",
@@ -13,7 +13,14 @@
         "php": ">=5.4",
         "filp/whoops": "^2.1",
         "symfony/var-dumper": "^3.1"
+		"phacil/html": "dev-master"
     },
+	"repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/phacil/html.git"
+        }
+    ],
     "require-dev": {
         "phpunit/phpunit": "4.0.*"
     },
