@@ -182,6 +182,6 @@ class Request{
             }
         }
        
-       return ROOT_URL . join('/', $out);
+       return rtrim(ROOT_URL, '/') . join('/', $out);
     } 
 }

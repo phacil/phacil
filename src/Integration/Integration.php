@@ -34,5 +34,5 @@ class Integration {
 
             return call_user_func_array(array($connection2,'where'), $args);
         }
-    } 
+    }
 }

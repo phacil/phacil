@@ -21,7 +21,7 @@ class QueryBuilderPagination extends QueryBuilder{
         return $total_records->count;		
     }
     
-    public function get() {
+    public function get($limit = NULL, $offset = NULL, $reset = true) {
         $args = Request::info('args');
         $page = isset($args['page'])?$args['page']:1;
         $limit = isset($args['limit'])?$args['limit']:Pagination::$limit;

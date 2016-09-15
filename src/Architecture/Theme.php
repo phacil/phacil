@@ -1,7 +1,8 @@
 <?php
 namespace Phacil\Architecture;
 
-use Phacil\HTML\HTML as Html;
+use Phacil\Component\HTML as Html;
+
 class Theme{
     
     protected static $name = 'default';

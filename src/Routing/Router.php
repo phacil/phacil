@@ -99,8 +99,8 @@ class Router {
             $newparts[] = ucfirst($parts[0]) . '\\' . ucfirst($parts[1]);
             $newparts[] = isset($parts[2])?$parts[2]:'index';
             
-            Request::setModule(ucfirst($parts[0]));
-            Request::setController(ucfirst($parts[1]));
+            Request::setModule($parts[0]);
+            Request::setController($parts[1]);
             Request::setAction(isset($parts[2])?$parts[2]:'index');
             
             unset($parts[0]);
@@ -112,7 +112,7 @@ class Router {
             $newparts[] = ucfirst($parts[0]);
             $newparts[] = isset($parts[1])?$parts[1]:'index';
            
-            Request::setController(ucfirst($parts[0]));
+            Request::setController($parts[0]);
             Request::setAction(isset($parts[1])?$parts[1]:'index');
             
             unset($parts[0]);
@@ -149,14 +149,19 @@ class Router {
     
     protected static function __render($callback, $params = []){
 
-	$controllerPath = '\\' . BUSINESS_NAMESAPACE . "\\" . $callback[0] . '\\' . Request::info('controller');
+	$controllerPath = '\\' . BUSINESS_NAMESAPACE . "\\" . $callback[0] . '\\' . ucwords(Request::info('controller'));
                 //pr($callback[0]); exit;
         $objController = new $controllerPath();
         $out = call_user_func_array(array($objController, Request::info('action')), $params);
         
         View::setName(!empty(View::getName())?View::getName():Request::info('action'));
 	        
-        View::setViewsPath(!empty(View::$viewsPath)?View::$viewsPath:BUSINESS_DIR . Request::info('module') . DS . Request::info('controller') . DS);
+        View::setViewsPath(!empty(View::$viewsPath)?View::$viewsPath
+                : BUSINESS_DIR 
+                . ucwords(Request::info('module')) 
+                . DS 
+                . ucwords(Request::info('controller')) 
+                . DS);
         
         Theme::includeLayoutViewOnTheme(View::getLayout(), View::getViewsPath() , View::getName(), View::getVars());
     }
