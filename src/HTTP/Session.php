@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Environment;
+namespace Phacil\HTTP;
 
 class Session{
 	

@@ -2,8 +2,10 @@
 
 namespace Phacil\Routing;
 
-use Phacil\Architecture\View as View;
-use Phacil\Architecture\Theme as Theme;
+use Phacil\Architecture\View;
+use Phacil\Architecture\Theme;
+use Phacil\Kernel\Request;
+use Phacil\HTTP\Server;
 
 class Router {
     
@@ -13,7 +15,7 @@ class Router {
     
     protected static $mapPrefix = '/';
     
-    protected static function __escapeGetMethodSeparator($str = null){    
+    protected static function __escapeGetMethodSeparator($str = null){
         $pos_1_e_comercial  = strpos($str, '&');
         $subtring_antes = rtrim(substr($str, 0, $pos_1_e_comercial), '/');
         $subtring_depois = substr($str, $pos_1_e_comercial+1, strlen($str));
@@ -22,7 +24,7 @@ class Router {
 
     protected static function __parseUri(){
         $redStr = Request::getKeyServer('REDIRECT_QUERY_STRING');        
-        Request::setMethod(Request::getKeyServer('REQUEST_METHOD'));
+        Request::setMethod(Server::get('REQUEST_METHOD'));
         self::$requestUri = ($redStr != '/' && !empty($redStr))
                 ?filter_var(rtrim($redStr, '/'), FILTER_SANITIZE_STRING)
                 :'/';

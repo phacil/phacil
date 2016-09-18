@@ -1,8 +1,8 @@
 <?php
 namespace Phacil\Architecture;
 
-use Phacil\Environment\App as App;
-use Phacil\Integration\Integration as Integration;
+use Phacil\Kernel\App;
+use Phacil\Integration\Integration;
 
 class Controller {
     

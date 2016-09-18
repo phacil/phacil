@@ -1,10 +1,8 @@
 <?php
 
-namespace Phacil\Form;
+namespace Phacil\HTML;
 
-use Phacil\HTML\HTML as HTML;
-
-class Form extends HTML {
+class Form extends Phacil\Component\HTML\HTML{
     
     public static function __callStatic($name, $arguments=[]) {
         if(empty($arguments)){$arguments[0]='';}

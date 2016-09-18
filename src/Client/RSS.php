@@ -1,12 +1,12 @@
 <?php
 
-namespace Phacil\Support;
+namespace Phacil\Client;
 
 /**
  * Description of RSSClient
  *
  * @author alisson
  */
-class RSSClient {
+class RSS {
     //put your code here
 }

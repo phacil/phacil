@@ -1,23 +1,18 @@
 <?php
-namespace Phacil\Environment;
+namespace Phacil\Kernel;
 
-use Phacil\Routing\Router as Router;
+use Phacil\Kernel\Dispatcher;
+
 class App {
+    
+    use \Phacil\Traits\Setter,
+         \Phacil\Traits\Getter;
     
     protected static $__vars = [];
     
-    public static function set($var, $value = ''){
-        self::$__vars[$var] = $value;
-    }
-    
-    public static function get($var){
-        if(isset(self::$__vars[$var])){
-            return self::$__vars[$var];
-        }
-        return false;
-    }
-    
     public static function debug($mode = false) {
+        
+        self::set('debug', $mode);
         
         if ($mode) {
             $whoops = new \Whoops\Run;
@@ -31,9 +26,10 @@ class App {
         }
     }
     
-    public static function run($callbackRun){        
-        
+    public static final function run(\Closure $callbackRun){ 
         call_user_func($callbackRun);
-        Router::run();
+        pr(self::$__vars);
+        exit;
+        return Dispatcher::run();
     }
 }

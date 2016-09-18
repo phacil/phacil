@@ -7,7 +7,7 @@
 
 namespace Phacil\Routing;
 
-use Phacil\Routing\Request as Request;
+use Phacil\Kernel\Request as Request;
 
 class Route {
     

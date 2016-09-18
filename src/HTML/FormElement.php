@@ -1,13 +1,11 @@
 <?php
 
-namespace Phacil\Form;
+namespace Phacil\HTML;
 
 use Phacil\Routing\Route as Route;
-use Phacil\Routing\Request as Request;
-use Phacil\HTML\HTML as HTML;
-use Phacil\HTML\HTMLElement as HTMLElement;
+use Phacil\Kernel\Request as Request;
 
-class FormElement extends HTMLElement{
+class FormElement extends Phacil\Component\HTML\HTMLElement{
     
     private function _form() {
         

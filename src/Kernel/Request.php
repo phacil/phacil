@@ -1,13 +1,13 @@
 <?php
 
-namespace Phacil\Routing;
+namespace Phacil\Kernel;
 
 class Request{
     
     private static $module = null;
     private static $controller = null;
     private static $action = null;
-    private static $params = array(); 
+    private static $params = array();
         
     private static $method = 'get';
     private static $url = null;

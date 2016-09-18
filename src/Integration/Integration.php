@@ -1,7 +1,7 @@
 <?php
 namespace Phacil\Integration;
 
-use Phacil\Environment\App;
+use Phacil\Kernel\App;
 
 class Integration {
         

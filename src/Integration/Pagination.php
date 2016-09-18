@@ -4,7 +4,7 @@ namespace Phacil\Integration;
 use Phacil\Routing\Request as Request;
 use Phacil\Routing\Route as Route;
 use Phacil\HTML\HTML as Html;
-use Phacil\Environment\App as App;
+use Phacil\Kernel\App as App;
 
 class Pagination {
         
