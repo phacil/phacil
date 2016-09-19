@@ -2,11 +2,15 @@
 namespace Phacil\Kernel;
 
 use Phacil\Kernel\Dispatcher;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Phacil\Routing\Router;
+
 
 class App {
     
     use \Phacil\Traits\Setter,
-         \Phacil\Traits\Getter;
+        \Phacil\Traits\Getter;
     
     protected static $__vars = [];
     
@@ -17,6 +21,8 @@ class App {
         if ($mode) {
             $whoops = new \Whoops\Run;
             $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+           
+            //$whoops->pushHandler(new \Whoops\Handler\JsonResponseHandler());
             $whoops->register();
         } else {            
             ini_set('display_errors','Off');
@@ -26,10 +32,12 @@ class App {
         }
     }
     
-    public static final function run(\Closure $callbackRun){ 
+    public static final function run(\Closure $callbackRun){
+        
         call_user_func($callbackRun);
-        pr(self::$__vars);
-        exit;
-        return Dispatcher::run();
+                          
+        return Dispatcher::run( Request::createFromGlobals(), 
+                                Router::routesCollection(), 
+                                new Response());
     }
 }

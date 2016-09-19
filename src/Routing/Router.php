@@ -15,23 +15,22 @@ class Router {
     
     protected static $mapPrefix = '/';
     
-    protected static function __escapeGetMethodSeparator($str = null){
-        $pos_1_e_comercial  = strpos($str, '&');
-        $subtring_antes = rtrim(substr($str, 0, $pos_1_e_comercial), '/');
-        $subtring_depois = substr($str, $pos_1_e_comercial+1, strlen($str));
-        return $subtring_antes . '/' . $subtring_depois;    
-    }
-
-    protected static function __parseUri(){
-        $redStr = Request::getKeyServer('REDIRECT_QUERY_STRING');        
-        Request::setMethod(Server::get('REQUEST_METHOD'));
-        self::$requestUri = ($redStr != '/' && !empty($redStr))
-                ?filter_var(rtrim($redStr, '/'), FILTER_SANITIZE_STRING)
-                :'/';
-        self::$requestUri = self::__escapeGetMethodSeparator(self::$requestUri);
-        Request::setUrl(self::$requestUri);
-        
-    }
+//    protected static function __escapeGetMethodSeparator($str = null){
+//        $pos_1_e_comercial  = strpos($str, '&');
+//        $subtring_antes = rtrim(substr($str, 0, $pos_1_e_comercial), '/');
+//        $subtring_depois = substr($str, $pos_1_e_comercial+1, strlen($str));
+//        return $subtring_antes . '/' . $subtring_depois;
+//    }
+//
+//    protected static function __parseUri(){
+//        $redStr = Request::getKeyServer('REDIRECT_QUERY_STRING');
+//        Request::setMethod(Server::get('REQUEST_METHOD'));
+//        self::$requestUri = ($redStr != '/' && !empty($redStr))
+//                ?filter_var(rtrim($redStr, '/'), FILTER_SANITIZE_STRING)
+//                :'/';
+//        self::$requestUri = self::__escapeGetMethodSeparator(self::$requestUri);
+//        Request::setUrl(self::$requestUri);        
+//    }
     
     protected static function __combineCallbackMatches($callback = [], $matches = []) {
         
@@ -183,6 +182,10 @@ class Router {
         echo '404 '. ' - ' . $errorTrigger;
     }
     
+    public static function routesCollection(){
+        return self::$routes;
+    }
+    
     public static function map($prefix = null, $callbackmap = null) {
         if($prefix){
             self::$mapPrefix = rtrim($prefix, '/');
@@ -204,7 +207,7 @@ class Router {
         
         unregisterGlobals();
         
-        self::$routes[] = self::$routes[] = new Route('GET|POST|PUT', self::$mapPrefix . '/*', null);        
+        self::$routes[] = self::$routes[] = new Route('GET|POST|PUT', self::$mapPrefix . '/*', null);
         $routes = self::$routes;
         
         self::__parseUri();
@@ -216,19 +219,19 @@ class Router {
             //PR($pattern);
             //PR(self::$requestUri);
             if(preg_match($pattern, self::$requestUri, $matches) && self::__matchRequestMethod($route->getMethod())){
-            //pr(explode('/',ltrim(self::$requestUri, '/')));
-            //pr($route);
-            $callback = self::__combineCallbackMatches($route->getCallback(), $matches);
-            //pr($matches);
-            //pr($callback);
+                //pr(explode('/',ltrim(self::$requestUri, '/')));
+                //pr($route);
+                $callback = self::__combineCallbackMatches($route->getCallback(), $matches);
+                //pr($matches);
+                //pr($callback);
 
-            //exit;
-            //unset($matches[0]);
+                //exit;
+                //unset($matches[0]);
 
-            $route->insertHeaders();
-            Request::escapePOSTandFILESputData();
+                $route->insertHeaders();
+                Request::escapePOSTandFILESputData();
 
-            return self::__renderOrExecute($callback, $route->getNamedArgs(), $matches);
+                return self::__renderOrExecute($callback, $route->getNamedArgs(), $matches);
                 
             }
         }

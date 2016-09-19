@@ -49,6 +49,8 @@ class Route {
         ''   => '([^/.]++)'
     ];
     
+    protected $matches = [];
+    
     /**
      * 
      * @param type $method
@@ -111,6 +113,10 @@ class Route {
     public function getNamedArgs() {
         return $this->namedArgs;
     }
+    
+    public function getMatches() {
+        return $this->matches;
+    }
 
     public function setMethod($method) {
        $this->method = $method;
@@ -126,6 +132,10 @@ class Route {
 
     public function setWhere($where) {
        $this->where = $where;
+    }
+    
+    public function setMatches($matches) {
+       $this->matches = $matches;
     }
 
     public function where($where = []) {
