@@ -30,7 +30,7 @@ class RouteResolver {
     }
     
     public static function resolve(Route $route) {
-        $callback = self::__combineCallbackMatches($route->getCallback(), $route->getMatches());
-        return $callback;
+        $route->setCallback(self::__combineCallbackMatches($route->getCallback(), $route->getMatches()));
+        return $route;
     }
 }

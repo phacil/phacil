@@ -21,24 +21,40 @@ class Theme{
                 } 
             }
 
+            if(!is_file($viewPath . $view . '.htp')){
+                throw new \Phacil\Exception\PhacilException('View '. $view . ' not found');
+            }
+            
             include($viewPath . $view . '.htp');
         });        
         
     }
 	
     public static function includeLayout($layout = '', $content = '', $vars = ''){
-        foreach($vars as $var => $value){
-            if(!isset($$var)){
-                $$var = $value;  
+        //return Html::buffer(function() use ($layout, $vars){
+            foreach($vars as $var => $value){
+                if(!isset($$var)){
+                    $$var = $value;  
+                }
             }
-        }
-        
-        include THEMES_DIR . self::$name . DS . $layout. '.htp';
+
+            if(!is_dir(THEMES_DIR . self::$name)){
+                throw new \Phacil\Exception\PhacilException('Theme '. self::$name . ' not found');
+            }
+            
+            if(!is_file(THEMES_DIR . self::$name . DS . $layout. '.htp')){
+                throw new \Phacil\Exception\PhacilException('Layout '. $layout . ' not found');
+            }
+            
+            include THEMES_DIR . self::$name . DS . $layout. '.htp';
+        //});        
     }
     
     public static function includeLayoutViewOnTheme($layout = null, $viewPath = null, $view = null, $vars = array()){
-        $content = self::loadView($viewPath, $view, $vars);
-        self::includeLayout($layout, $content, $vars);
+        return Html::buffer(function() use ($layout,$viewPath, $view, $vars){
+            $content = self::loadView($viewPath, $view, $vars);
+            self::includeLayout($layout, $content, $vars);
+        });
     }
     
     public static function css($param = array()) {

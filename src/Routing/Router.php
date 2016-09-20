@@ -74,79 +74,79 @@ class Router {
         }
         return array($_params, $_args);
     }
-
-    protected static function __defineModuleControllerAction($match = null){
-        
-        $parts = $newparts = [];
-        
-        if(!is_array($match)){
-            $parts = explode('/', ltrim($match, '/'));
-        }else{
-            if(strpos($match[0], '/')){
-                list($parts[0], $parts[1]) = explode('/', $match[0]);         
-            }else{
-               $parts[0] = $match[0];
-            }            
-            unset($match[0]);
-            
-            foreach($match as $param){
-                $parts[] = $param;
-            }            
-        }
-        
-        //pr($parts);
-        
-        if(isset($parts[1]) &&  is_file(BUSINESS_DIR . DS . ucfirst($parts[0]) . DS. ucfirst($parts[1]) . DS . ucfirst($parts[1]) . '.php')){
-            $newparts[] = ucfirst($parts[0]) . '\\' . ucfirst($parts[1]);
-            $newparts[] = isset($parts[2])?$parts[2]:'index';
-            
-            Request::setModule($parts[0]);
-            Request::setController($parts[1]);
-            Request::setAction(isset($parts[2])?$parts[2]:'index');
-            
-            unset($parts[0]);
-            unset($parts[1]);
-            unset($parts[2]);
-        }
-       
-        else if(is_file(BUSINESS_DIR . DS . ucfirst($parts[0]) . DS . ucfirst($parts[0]) . '.php')){
-            $newparts[] = ucfirst($parts[0]);
-            $newparts[] = isset($parts[1])?$parts[1]:'index';
-           
-            Request::setController($parts[0]);
-            Request::setAction(isset($parts[1])?$parts[1]:'index');
-            
-            unset($parts[0]);
-            unset($parts[1]);
-        }else{
-            exit('ERRO');
-        }
-        
-        list($_params, $_args) = self::__diffParamsArgs($parts);
-        Request::setParams($_params);
-        Request::setArgs($_args);
-        //pr(Request::info());       
-        return [$newparts, $_params];
-    }   
-    
+//
+//    protected static function __defineModuleControllerAction($match = null){
+//        
+//        $parts = $newparts = [];
+//        
+//        if(!is_array($match)){
+//            $parts = explode('/', ltrim($match, '/'));
+//        }else{
+//            if(strpos($match[0], '/')){
+//                list($parts[0], $parts[1]) = explode('/', $match[0]);         
+//            }else{
+//               $parts[0] = $match[0];
+//            }            
+//            unset($match[0]);
+//            
+//            foreach($match as $param){
+//                $parts[] = $param;
+//            }            
+//        }
+//        
+//        //pr($parts);
+//        
+//        if(isset($parts[1]) &&  is_file(BUSINESS_DIR . DS . ucfirst($parts[0]) . DS. ucfirst($parts[1]) . DS . ucfirst($parts[1]) . '.php')){
+//            $newparts[] = ucfirst($parts[0]) . '\\' . ucfirst($parts[1]);
+//            $newparts[] = isset($parts[2])?$parts[2]:'index';
+//            
+//            Request::setModule($parts[0]);
+//            Request::setController($parts[1]);
+//            Request::setAction(isset($parts[2])?$parts[2]:'index');
+//            
+//            unset($parts[0]);
+//            unset($parts[1]);
+//            unset($parts[2]);
+//        }
+//       
+//        else if(is_file(BUSINESS_DIR . DS . ucfirst($parts[0]) . DS . ucfirst($parts[0]) . '.php')){
+//            $newparts[] = ucfirst($parts[0]);
+//            $newparts[] = isset($parts[1])?$parts[1]:'index';
+//           
+//            Request::setController($parts[0]);
+//            Request::setAction(isset($parts[1])?$parts[1]:'index');
+//            
+//            unset($parts[0]);
+//            unset($parts[1]);
+//        }else{
+//            exit('ERRO');
+//        }
+//        
+//        list($_params, $_args) = self::__diffParamsArgs($parts);
+//        Request::setParams($_params);
+//        Request::setArgs($_args);
+//        //pr(Request::info());       
+//        return [$newparts, $_params];
+//    }   
+//    
     protected static function __discoverController($controller){
         return array_reverse(array_merge(array(''), explode('/', $controller)));
     }
       
-    protected static function __compareArgs($callback, $routeArgs) {
-        $params = [];
-        $ref = new \ReflectionFunction($callback);
-        foreach( $ref->getParameters() as $param) {
-            if(array_key_exists($param->name, $routeArgs)){
-                $params[] = $routeArgs[$param->name];
-            }
-        }
-        return $params;
-    }
-    //
-    protected static function __executeCallback($callback, $params = []){
-        return call_user_func_array($callback, self::__compareArgs($callback, $params));
-    }
+//    protected static function __compareArgs($callback, $routeArgs) {
+//        $params = [];
+//        $ref = new \ReflectionFunction($callback);
+//        foreach( $ref->getParameters() as $param) {
+//            if(array_key_exists($param->name, $routeArgs)){
+//                $params[] = $routeArgs[$param->name];
+//            }
+//        }
+//        return $params;
+//    }
+//    //
+//    protected static function __executeCallback($callback, $params = []){
+//        return call_user_func_array($callback, self::__compareArgs($callback, $params));
+//    }
     
     protected static function __render($callback, $params = []){
 
@@ -175,7 +175,7 @@ class Router {
         }else{
             unset($matches[0]);
             return self::__executeCallback($callback, array_combine($namedParams, $matches));          
-        }        
+        }
     }
 
     protected static function __send404($errorTrigger = null){
