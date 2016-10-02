@@ -6,6 +6,7 @@ use Phacil\Kernel\App;
 use Phacil\Routing\RouteMatcher;
 use Phacil\Kernel\Request;
 use Phacil\Routing\RouteResolver;
+use Phacil\HTTP\Server;
 
 class Dispatcher {
     
@@ -22,11 +23,11 @@ class Dispatcher {
             $_COOKIE = stripSlashesDeep($_COOKIE);
             $_FILES = stripSlashesDeep($_FILES);
         }
-        Params::setData(array_merge(Params::getData(), $_POST));
-        Params::setData(array_merge(Params::getData(), $_FILES));
+        Request::setData(array_merge(Request::getData(), $_POST));
+        Request::setData(array_merge(Request::getData(), $_FILES));
         
-        if(isset(Params::getData()['_method'])){
-            self::setMethod(Params::getData()['_method']);
+        if(isset(Request::getData()['_method'])){
+            self::setMethod(Request::getData()['_method']);
         }
     }
 
@@ -40,28 +41,26 @@ class Dispatcher {
 //        Request::setUrl($path);
     }
         
-    public static function run($request = null, $routesCollection = null, $response = null){ 
+    public static function run($routesCollection = null, $response = null){ 
         
-        Params::setMethod($request->server->get('REQUEST_METHOD'));
-        Params::setUrl($request->getPathInfo());
-        
-//      pr($routesCollection);exit;
+        Request::setMethod(Server::get('REQUEST_METHOD'));
+        Request::setUrl(Server::get('REDIRECT_QUERY_STRING'));
         
         $content = null;
-        $path = self::__parseUri($request->getPathInfo());
+        $path = self::__parseUri(Request::getUrl());
+        //pr($path);exit;
        
         //try{
-            $matchedRoute = RouteMatcher::match($routesCollection, Params::getUrl(), Params::getMethod());
+            $matchedRoute = RouteMatcher::match($routesCollection, $path, Request::getMethod());
             
             $resolvedRoute = RouteResolver::resolve($matchedRoute);
-           // pr($resolvedRoute);exit;
+            //pr(Request::getUrl());exit;
             self::escapePOSTandFILESputData();
-            
             
             $callback = $resolvedRoute->getCallback();
             $matches = $resolvedRoute->getMatches();
             $namedArgs = $resolvedRoute->getNamedArgs();
-            
+                       
             if(is_callable($callback) && $callback instanceof \Closure){
                 $dispathCallback = new DispathCallback($callback, $matches, $namedArgs);
                 $content = $dispathCallback->run();

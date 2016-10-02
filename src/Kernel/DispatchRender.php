@@ -13,14 +13,14 @@ class DispatchRender {
         $this->callback = $callback;
     }
     
-    private function __diffParamsArgs($params = []){
+    private function __diffRequestArgs($params = []){
         $_params = $_args = [];
         
         $last = array_last($params);
         if(strpos($last, '&')){
             array_pop_last($params);
             $_get_args = explode('&', $last);            
-            Params::setData(array_associate_key_value($_get_args));
+            Request::setGet(array_associate_key_value($_get_args));
         }        
         
         foreach ($params as $param) {
@@ -53,15 +53,15 @@ class DispatchRender {
             }
         }
         
-        //pr($parts);
+        //pr($parts);exit;
         
         if(isset($parts[1]) &&  is_file(BUSINESS_DIR . DS . ucfirst($parts[0]) . DS. ucfirst($parts[1]) . DS . ucfirst($parts[1]) . '.php')){
             $newparts[] = ucfirst($parts[0]) . '\\' . ucfirst($parts[1]);
             $newparts[] = isset($parts[2])?$parts[2]:'index';
             
-            Params::setModule($parts[0]);
-            Params::setController($parts[1]);
-            Params::setAction(isset($parts[2])?$parts[2]:'index');
+            Request::setModule($parts[0]);
+            Request::setController($parts[1]);
+            Request::setAction(isset($parts[2])?$parts[2]:'index');
             
             unset($parts[0]);
             unset($parts[1]);
@@ -72,8 +72,8 @@ class DispatchRender {
             $newparts[] = ucfirst($parts[0]);
             $newparts[] = isset($parts[1])?$parts[1]:'index';
            
-            Params::setController($parts[0]);
-            Params::setAction(isset($parts[1])?$parts[1]:'index');
+            Request::setController($parts[0]);
+            Request::setAction(isset($parts[1])?$parts[1]:'index');
             
             unset($parts[0]);
             unset($parts[1]);
@@ -81,32 +81,32 @@ class DispatchRender {
             throw new \Phacil\Exception\PhacilException('Controller not found');
         }
         
-        list($_params, $_args) = $this->__diffParamsArgs($parts);
-        Params::setParams($_params);
-        Params::setArgs($_args);
+        list($_params, $_args) = $this->__diffRequestArgs($parts);
+        Request::setParams($_params);
+        Request::setArgs($_args);
         //pr(Request::info());       
         return [$newparts, $_params];
     } 
     
     private function __render($callback, $params = []){
 
-	$controllerPath = '\\' . BUSINESS_NAMESAPACE . "\\" . $callback[0] . '\\' . ucwords(Params::getController());
-        //pr($callback[0]); exit;
+	$controllerPath = '\\' . BUSINESS_NAMESAPACE . "\\" . $callback[0] . '\\' . ucwords(Request::getController());
+        
         $objController = new $controllerPath();
         
-        if(!method_exists($objController, Params::getAction())){
-            throw new \Phacil\Exception\PhacilException('Action '. Params::getAction() . ' not found');
+        if(!method_exists($objController, Request::getAction())){
+            throw new \Phacil\Exception\PhacilException('Action '. Request::getAction() . ' not found');
         }
         
-        call_user_func_array(array($objController, Params::getAction()), $params);
+        call_user_func_array(array($objController, Request::getAction()), $params);
         
-        View::setName(!empty(View::getName())?View::getName():Params::getAction());
+        View::setName(!empty(View::getName())?View::getName():Request::getAction());
 	        
         View::setViewsPath(!empty(View::getViewsPath())?View::getViewsPath()
                 : BUSINESS_DIR 
-                . ucwords(Params::getModule()) 
+                . ucwords(Request::getModule()) 
                 . DS 
-                . ucwords(Params::getController()) 
+                . ucwords(Request::getController()) 
                 . DS);
         
         return Theme::includeLayoutViewOnTheme(View::getLayout(), 
@@ -116,7 +116,8 @@ class DispatchRender {
     }
     
     public function run(){
-        list($callback, $params) = $this->__defineModuleControllerAction($this->callback);
+        
+        list($callback, $params) = $this->__defineModuleControllerAction($this->callback);        
         return $this->__render($callback, $params);
     }
 }

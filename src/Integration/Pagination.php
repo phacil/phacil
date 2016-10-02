@@ -1,10 +1,11 @@
 <?php
 namespace Phacil\Integration;
 
-use Phacil\Routing\Request as Request;
-use Phacil\Routing\Route as Route;
-use Phacil\HTML\HTML as Html;
-use Phacil\Kernel\App as App;
+use Phacil\Kernel\Request;
+use Phacil\Routing\Route;
+use Phacil\Component\HTML\HTML as Html;
+use Phacil\Kernel\App;
+use Phacil\Integration\Integration as DB;
 
 class Pagination {
         
@@ -28,7 +29,7 @@ class Pagination {
     }
     
     protected static function __getConnection(){
-        $dbConfig = \DB::$dbConfig;
+        $dbConfig = DB::$dbConfig;
         if(!isset(self::$dbConfigs[$dbConfig])){
             self::$dbConfigs[$dbConfig] = self::__setDbConfig($dbConfig);
         }       

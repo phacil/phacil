@@ -42,11 +42,11 @@ class Theme{
                 throw new \Phacil\Exception\PhacilException('Theme '. self::$name . ' not found');
             }
             
-            if(!is_file(THEMES_DIR . self::$name . DS . $layout. '.htp')){
+            if(!is_file(THEMES_DIR . self::$name . DS . $layout. '.php')){
                 throw new \Phacil\Exception\PhacilException('Layout '. $layout . ' not found');
             }
             
-            include THEMES_DIR . self::$name . DS . $layout. '.htp';
+            include THEMES_DIR . self::$name . DS . $layout. '.php';
         //});        
     }
     

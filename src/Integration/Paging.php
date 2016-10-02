@@ -2,8 +2,8 @@
 
 namespace Phacil\Integration;
 
-use Phacil\HTML\HTML as Html;
-use Phacil\Routing\Route as Route;
+use Phacil\Component\HTML\HTML as Html;
+use Phacil\Routing\Route;
 
 class Paging {
     

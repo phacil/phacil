@@ -2,7 +2,7 @@
 
 namespace Phacil\Integration;
 use \PDO as PDO;
-use \Phacil\Routing\Request as Request;
+use Phacil\Kernel\Request as Request;
 
 class QueryBuilderPagination extends QueryBuilder{
     

@@ -7,7 +7,7 @@
 
 namespace Phacil\Routing;
 
-use Phacil\Kernel\Request as Request;
+use Phacil\Kernel\Request;
 
 class Route {
     
@@ -153,6 +153,7 @@ class Route {
    }
    
     public static function url($url = '/'){
+        //pr($url);
         return new Request($url);
     }   
 }

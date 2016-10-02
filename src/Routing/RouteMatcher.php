@@ -2,7 +2,7 @@
 
 namespace Phacil\Routing;
 
-use Phacil\Kernel\Params;
+use Phacil\Kernel\Request;
 
 class RouteMatcher {
     
@@ -14,6 +14,7 @@ class RouteMatcher {
     }
     
     public static function match($routesCollection, $path, $method){
+        //$path = rtrim($path, '/');
         foreach ($routesCollection as $route) {
             $matches = null;
             $pattern = '/^' . str_replace('/','\\/', $route->getRoute()) . '$/i';
