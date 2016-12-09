@@ -2,11 +2,6 @@
 
 namespace Phacil\Routing;
 
-use Phacil\Architecture\View;
-use Phacil\Architecture\Theme;
-use Phacil\Kernel\Request;
-use Phacil\HTTP\Server;
-
 class Router {
     
     protected static $requestUri = null;
@@ -29,10 +24,14 @@ class Router {
             return false;
         }
     }
+    
+    public static function scope($prefix = null, $callbackmap = null){
+        return self::map($prefix, $callbackmap);
+    }
 
     public static function add($method, $route, $callback = null){
         
         self::$routes[] = new Route($method, self::$mapPrefix . $route, $callback);
         return end(self::$routes);
-    }    
+    }
 }

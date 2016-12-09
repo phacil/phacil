@@ -4,6 +4,7 @@ namespace Phacil\Kernel;
 
 use Phacil\Architecture\Theme;
 use Phacil\Architecture\View;
+use Phacil\HTTP\Request;
 
 class DispatchRender {
     
@@ -15,14 +16,7 @@ class DispatchRender {
     
     private function __diffRequestArgs($params = []){
         $_params = $_args = [];
-        
-        $last = array_last($params);
-        if(strpos($last, '&')){
-            array_pop_last($params);
-            $_get_args = explode('&', $last);            
-            Request::setGet(array_associate_key_value($_get_args));
-        }        
-        
+              
         foreach ($params as $param) {
             if(strpos($param, '=')){
                 list($k, $v) = explode('=', $param);
@@ -34,10 +28,17 @@ class DispatchRender {
         return array($_params, $_args);
     }
     
+    private function __discardGetArgs(&$params){
+        $last = array_last($params);
+        if(strpos($last, '&')){
+            array_pop_last($params);      
+        }       
+    }
+
     private function __defineModuleControllerAction($match = null){
         
         $parts = $newparts = [];
-        
+               
         if(!is_array($match)){
             $parts = explode('/', ltrim($match, '/'));
         }else{
@@ -53,6 +54,8 @@ class DispatchRender {
             }
         }
         
+        $this->__discardGetArgs($parts);
+                
         //pr($parts);exit;
         
         if(isset($parts[1]) &&  is_file(BUSINESS_DIR . DS . ucfirst($parts[0]) . DS. ucfirst($parts[1]) . DS . ucfirst($parts[1]) . '.php')){

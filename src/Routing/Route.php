@@ -7,7 +7,7 @@
 
 namespace Phacil\Routing;
 
-use Phacil\Kernel\Request;
+use Phacil\HTTP\Request;
 
 class Route {
     
@@ -150,10 +150,10 @@ class Route {
        if(isset($this->headers['mimetype'])){
           header('Content-Type: ' . $this->mimetypes[$this->headers['mimetype']]);
        }
-   }
+    }
    
     public static function url($url = '/'){
         //pr($url);
-        return new Request($url);
+        return new RouteBuilder($url);
     }   
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Kernel;
+namespace Phacil\HTTP;
 
 class Request {
     private static $module = null;
@@ -10,6 +10,7 @@ class Request {
         
     private static $method = 'get';
     private static $url = null;
+    private static $uri = null;
     private static $prefix = null;
     private static $args = [];
     private static $get = [];
@@ -24,6 +25,56 @@ class Request {
                              'params'=>array(),
                              'args'=>array() );
     
+    static function init(){
+        Server::init($_SERVER);
+        self::setMethod(Server::get('REQUEST_METHOD'));
+        self::setUri(self::__parseUri(Server::get('REDIRECT_QUERY_STRING')));
+        self::escapePOSTandFILESputData();
+        self::__diffUrl();
+    }
+    
+    private static function __parseUri($path){
+        
+        $path = ($path != '/' && !empty($path))
+                ?filter_var(rtrim($path, '/'), FILTER_SANITIZE_STRING)
+                :'/';
+        return self::__escapeGetMethodSeparator($path);
+
+    }
+    
+    private static function __escapeGetMethodSeparator($str = null){
+        $pos_1_e_comercial  = strpos($str, '&');
+        $subtring_antes = rtrim(substr($str, 0, $pos_1_e_comercial), '/');
+        $subtring_depois = substr($str, $pos_1_e_comercial+1, strlen($str));
+        return $subtring_antes . '/' . $subtring_depois;
+    }
+    
+    private static function escapePOSTandFILESputData() {
+        if ( get_magic_quotes_gpc() ) {
+            $_POST   = stripSlashesDeep($_POST  );
+            $_COOKIE = stripSlashesDeep($_COOKIE);
+            $_FILES = stripSlashesDeep($_FILES);
+        }
+        self::setData(array_merge(Request::getData(), $_POST));
+        self::setData(array_merge(Request::getData(), $_FILES));
+        
+        if(isset(self::getData()['_method'])){
+            self::setMethod(self::getData()['_method']);
+        }
+    }
+    
+    private function __diffUrl(){
+        $last = array_last(explode('/', self::getUri()));
+        
+        if(strpos($last, '&')){
+            self::setUrl(str_replace($last, '', self::getUri()));
+            $_get_args = explode('&', $last);
+            Request::setGet(array_associate_key_value($_get_args));
+        }else{
+           self::setUrl(self::getUri()); 
+        }
+    }
+
     static function getModule() {
         return self::$module;
     }
@@ -63,6 +114,10 @@ class Request {
     static function getGet() {
         return self::$get;
     }
+    
+    static function getUri() {
+        return self::$uri;
+    }
 
     static function setModule($module) {
         self::$module = $module;
@@ -97,11 +152,15 @@ class Request {
     }
 
     static function setData($data) {
-        self::$data = $data;
+        self::$data = is_array($data)?$data:(array)$data;
     }
     
     static function setGet($get) {
         self::$get = $get;
+    }
+    
+    static function setUri($uri) {
+        self::$uri = $uri;
     }
     
     public static function info($key = null){
@@ -114,6 +173,7 @@ class Request {
 
                 'method' => self::$method,
                 'url' => self::$url,
+                'uri' => self::$uri,
                 'prefix' => self::$prefix,
                 'args' => self::$args,
                 'get' => self::$get,
@@ -138,82 +198,4 @@ class Request {
         }
         return false;        
     }
-    
-    public function __construct($url = '/') {
-        $this->request['url'] = $url;
-        return $this;
-    }    
-       
-    private function initRequestInfo($parts = array()) {
-        foreach($parts as $part){
-            if(empty($this->request[$part])){
-                $this->request[$part] = self::$$part;
-            }
-        }
-    }    
- 
-    public function prefix($prefix = ''){
-       $this->request['prefix'] = $prefix;
-       return $this;
-    } 
-    
-    public function module($module = ''){
-        $this->initRequestInfo(array('prefix'));
-        $this->request['module'] = $module;
-        return $this;
-    }
-    
-    public function controller($controller = ''){
-        $this->initRequestInfo(array('prefix', 'module'));
-        $this->request['controller'] = $controller;
-        return $this;
-    }
-    
-    public function action($action = ''){
-        $this->initRequestInfo(array('prefix', 'module', 'controller'));
-        $this->request['action'] = $action;
-        return $this;
-    }
-    
-    public function params($params = array()){
-        $this->initRequestInfo(array('prefix', 'module', 'controller', 'action'));
-        $this->request['params'] = $params;
-        return $this;
-    }
-    
-    public function args($args = array()){
-        $this->initRequestInfo(array('prefix', 'module', 'controller', 'action', 'params'));
-        $this->request['args'] = array_merge(self::$args, $args);
-        return $this;
-    }
-    
-    public function output(){
-        return $this->__toString();
-    }
-
-    public function __toString() {
-        $out = array();
-        //pr($this->request);
-        foreach($this->request as $k => $part){
-            if(!empty($part)){
-                if($k == 'args'){
-                    $out2 = array();
-                    foreach($part as $idx => $value){
-                        $out2[] = $idx . '='.$value;
-                    }
-                    $out[] = join('/', $out2);
-                }else if($k == 'params'){
-                    $out[] = join('/', $part);
-                }else{
-                    if($part == '/'){
-                        continue;
-                    }
-                    $part = ltrim($part, '/');
-                    $out[] = $part;
-                }
-            }
-        }
-       
-        return ROOT_URL . join('/', $out);
-    } 
 }

@@ -2,9 +2,10 @@
 namespace Phacil\Kernel;
 
 use Phacil\Kernel\Dispatcher;
-use Symfony\Component\HttpFoundation\Response;
 use Phacil\Routing\Router;
 use Phacil\Component\HTML\Form;
+use Phacil\HTTP\Response;
+use Phacil\HTTP\Request;
 
 class App {
     
@@ -34,8 +35,11 @@ class App {
     public static final function run(\Closure $callbackRun){
         
         Form::registry('route', "\\Phacil\\Routing\\Route");
-        Form::registry('params', "\\Phacil\\Kernel\\Request");
+        Form::registry('params', "\\Phacil\\HTTP\\Request");
+        Form::registry('data', "\\Phacil\\HTTP\\Request");
         
+        Request::init();
+               
         call_user_func($callbackRun);
                           
         return Dispatcher::run( Router::routesCollection(),

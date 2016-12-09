@@ -2,7 +2,7 @@
 
 namespace Phacil\Integration;
 use \PDO as PDO;
-use Phacil\Kernel\Request as Request;
+use Phacil\HTTP\Request as Request;
 
 class QueryBuilderPagination extends QueryBuilder{
     
@@ -33,7 +33,6 @@ class QueryBuilderPagination extends QueryBuilder{
         //pr($this);
         Pagination::$records = $this->numRows;
         Pagination::$total_records = $this->total_records();
-        
         
         $this->reset();        
         return $records;

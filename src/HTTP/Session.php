@@ -2,10 +2,20 @@
 
 namespace Phacil\HTTP;
 
+use Phacil\HTTP\Server;
+
 class Session{
 	
-    public static function start($name, $limit = 0, $path = '/', $domain = null, $secure = null){
-        // Set the cookie name
+    public static function start($name='a', $limit = 0, $path = '/', $domain = null, $secure = null){
+        
+        ini_set('session.cookie_httponly', 1);
+        
+        if(!$name){
+            $name = md5(Server::get('REMOTE_ADRESS') . Server::get('HTTP_USER_AGENT'));
+        }else{
+            $name = md5($name); 
+        }
+        
         session_name($name . '_Session');
 
         // Set SSL level
@@ -22,9 +32,10 @@ class Session{
                 if(!self::preventHijacking())
                 {
                         // Reset session data and regenerate id
-                        $_SESSION = array();
-                        $_SESSION['IPaddress'] = $_SERVER['REMOTE_ADDR'];
-                        $_SESSION['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
+                        self::clean();
+                        self::set('_config.IPaddress', Server::get('REMOTE_ADDR'));
+                        self::set('_config.userAgent', Server::get('HTTP_USER_AGENT'));
+                        
                         self::regenerateSession();
 
                 // Give a 5% chance of the session id changing on any request
@@ -37,15 +48,20 @@ class Session{
                 session_start();
         }
     }
-	
+    
+    private static function clean(){
+        $_SESSION = [];
+    }
+
     static protected function preventHijacking(){
-            if(!isset($_SESSION['IPaddress']) || !isset($_SESSION['userAgent']))
+            if(!(self::get('_config.IPaddress')) || !(self::get('_config.userAgent'))){
+                    return false;
+            }
+            
+            if (self::get('_config.IPaddress') != Server::get('REMOTE_ADDR'))
                     return false;
 
-            if ($_SESSION['IPaddress'] != $_SERVER['REMOTE_ADDR'])
-                    return false;
-
-            if( $_SESSION['userAgent'] != $_SERVER['HTTP_USER_AGENT'])
+            if( self::get('_config.userAgent') != Server::get('HTTP_USER_AGENT'))
                     return false;
 
             return true;
@@ -53,16 +69,16 @@ class Session{
             /*if(!self::preventHijacking())
             {
                     $_SESSION = array();
-                    $_SESSION['IPaddress'] = $_SERVER['REMOTE_ADDR'];
-                    $_SESSION['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
+                    self::get('_config.IPaddress') = Server::get('REMOTE_ADDR');
+                    self::get('_config.userAgent') = Server::get('HTTP_USER_AGENT');
             }*/
     }
 
     public static function regenerateSession(){
 
             // If this session is obsolete it means there already is a new id
-            if(isset($_SESSION['OBSOLETE']) || $_SESSION['OBSOLETE'] == true)
-                    return;
+//            if(isset($_SESSION['OBSOLETE']) || $_SESSION['OBSOLETE'] == true)
+//                    return;
 
             // Set current session to expire in 10 seconds
             $_SESSION['OBSOLETE'] = true;

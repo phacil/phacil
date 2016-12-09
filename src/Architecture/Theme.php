@@ -26,7 +26,7 @@ class Theme{
             }
             
             include($viewPath . $view . '.htp');
-        });        
+        });
         
     }
 	

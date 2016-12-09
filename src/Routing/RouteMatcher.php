@@ -2,8 +2,6 @@
 
 namespace Phacil\Routing;
 
-use Phacil\Kernel\Request;
-
 class RouteMatcher {
     
     protected static function __matchRequestMethod($requestMethod = 'GET', $method){        
@@ -18,8 +16,9 @@ class RouteMatcher {
         foreach ($routesCollection as $route) {
             $matches = null;
             $pattern = '/^' . str_replace('/','\\/', $route->getRoute()) . '$/i';
-            //PR($pattern);
-            //PR(self::$requestUri);
+//            PR($pattern);
+//            pr($method);
+//            exit;
             if(preg_match($pattern, $path, $matches) && self::__matchRequestMethod($route->getMethod(), $method)){
                 $route->setMatches($matches);
                 return $route;

@@ -1,11 +1,16 @@
 <?php
 namespace Phacil\Integration;
 
-use Phacil\Kernel\Request;
-use Phacil\Routing\Route;
-use Phacil\Component\HTML\HTML as Html;
 use Phacil\Kernel\App;
+use Phacil\HTTP\Request;
+
+use Phacil\Routing\Route;
+
+use Phacil\Component\HTML\HTML as Html;
+
 use Phacil\Integration\Integration as DB;
+
+use ICanBoogie\Inflector;
 
 class Pagination {
         
@@ -22,6 +27,10 @@ class Pagination {
     public static $container = array('tag'=>'ul', 'class'=>'');
     public static $list = array('tag'=>'li', 'class'=>'', 'classActive'=>'active', 'classDisabled'=>'disabled');    
    
+    private static function __getInflactor(){
+        return Inflector::get('pt');
+    }
+    
     protected static function __setDbConfig($var = 'default'){
         //pr(App::get('datasources'));exit;
         $dbConfig = App::get('datasources')[$var];
@@ -49,7 +58,7 @@ class Pagination {
 
             return call_user_func_array(array($connection2,'where'), $args);
         }
-    } 
+    }
     
     public static function pages() {
         $request = Request::info();
@@ -73,8 +82,8 @@ class Pagination {
         return 'ASC';
     }
 
-    public static function order($field, $label = null) {
-        $text = ($label)?$label:$field;
+    public static function order($field, $label = null) {        
+        $text = ($label)?$label:self::__getInflactor()->camelize($field);
         $direction = self::__setDirection($field);
         $rota = Route::url()->args(array('order'=>$field, 'direction'=>  $direction));
         return Html::a($text)->href($rota)->output();

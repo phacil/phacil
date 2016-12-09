@@ -1,10 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 namespace Phacil\HTTP;
 /**
  * Description of Server
@@ -13,14 +8,28 @@ namespace Phacil\HTTP;
  */
 class Server {
     
+    protected static $collection = [];
+
+    public static function init($serverArray = []){
+        foreach($serverArray as $k => $item){
+            self::$collection[$k] = $item;
+            $_SERVER[$k] = null;
+        }
+    }
+    
     public static function get($key) {
-        if(isset($_SERVER[$key])){
-            return $_SERVER[$key];
+        
+        if(isset(self::$collection[$key])){
+            return self::$collection[$key];
         }
         return false;
     }
     
     public static function getAll() {
-        return $_SERVER;
+         return self::getCollection();
+    }
+    
+    public static function getCollection() {
+        return self::$collection;
     }
 }

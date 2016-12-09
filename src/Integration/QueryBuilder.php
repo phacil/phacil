@@ -65,6 +65,7 @@ class QueryBuilder
             $this->pdo->exec("SET NAMES '".$config['charset']."' COLLATE '".$config['collation']."'");
             $this->pdo->exec("SET CHARACTER SET '".$config['charset']."'");
             $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            //$this->pdo->setAttribute(PDO::ATTR_FETCH_TABLE_NAMES, true);
         }catch (PDOException $e){
             die('Cannot the connect to Database with PDO.<br /><br />'.$e->getMessage());
         }
