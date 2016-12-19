@@ -11,8 +11,8 @@ use Phacil\Integration\ORM\ORMQuery;
 
 class App {
     
-    use \Phacil\Traits\Setter,
-        \Phacil\Traits\Getter;
+    use \Phacil\Core\Traits\Setter,
+        \Phacil\Core\Traits\Getter;
     
     protected static $__vars = [];
     
