@@ -1,8 +1,8 @@
 <?php
 namespace Phacil\Core\Kernel;
 
-use Phacil\Kernel\Dispatcher;
-use Phacil\Routing\Router;
+use Phacil\Core\Kernel\Dispatcher;
+use Phacil\Core\Routing\Router;
 use Phacil\HTML\Form;
 use Phacil\HTTP\Response;
 use Phacil\HTTP\Request;

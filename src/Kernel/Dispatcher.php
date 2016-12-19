@@ -2,9 +2,9 @@
 
 namespace Phacil\Core\Kernel;
 
-use Phacil\Routing\RouteMatcher;
+use Phacil\Core\Routing\RouteMatcher;
 use Phacil\HTTP\Request;
-use Phacil\Routing\RouteResolver;
+use Phacil\Core\Routing\RouteResolver;
 use Phacil\HTTP\Server;
 
 class Dispatcher {
@@ -33,10 +33,10 @@ class Dispatcher {
                 $dispathRender = new DispatchRender($callback, $matches, $namedArgs);
                 $content = $dispathRender->run();
             }else{
-                throw new \Phacil\Exception\PhacilException('Error Callback Router');
+                throw new Phacil\Core\Exception\PhacilException('Error Callback Router');
             }
             $response->setContent($content);
-        //}catch (\Phacil\Exception\PhacilException $e){
+        //}catch (Phacil\Core\Exception\PhacilException $e){
         //    $response->setContent($e->getMessage());
         //}catch (\Exception $e){
        //     $response->setContent('An Error Occured:'.$e->getMessage());

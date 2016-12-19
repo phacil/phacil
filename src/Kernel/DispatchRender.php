@@ -2,8 +2,8 @@
 
 namespace Phacil\Core\Kernel;
 
-use Phacil\Architecture\Theme;
-use Phacil\Architecture\View;
+use Phacil\Core\Architecture\Theme;
+use Phacil\Core\Architecture\View;
 use Phacil\HTTP\Request;
 
 class DispatchRender {
@@ -83,7 +83,7 @@ class DispatchRender {
             unset($parts[0]);
             unset($parts[1]);
         }else{
-            throw new \Phacil\Exception\PhacilException('Controller not found');
+            throw new Phacil\Core\Exception\PhacilException('Controller not found');
         }
         
         list($_params, $_args) = $this->__diffRequestArgs($parts);
@@ -100,7 +100,7 @@ class DispatchRender {
         $objController = new $controllerPath();
         
         if(!method_exists($objController, Request::getAction())){
-            throw new \Phacil\Exception\PhacilException('Action '. Request::getAction() . ' not found');
+            throw new Phacil\Core\Exception\PhacilException('Action '. Request::getAction() . ' not found');
         }
         
         call_user_func_array(array($objController, Request::getAction()), $params);

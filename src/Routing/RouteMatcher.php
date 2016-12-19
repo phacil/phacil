@@ -24,6 +24,6 @@ class RouteMatcher {
                 return $route;
             }
         }
-        throw new \Phacil\Exception\PhacilException('Rota não encontrada');
+        throw new \Phacil\Core\Exception\PhacilException('Rota não encontrada');
     } 
 }
