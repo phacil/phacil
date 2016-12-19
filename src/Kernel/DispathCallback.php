@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Phacil\Kernel;
+namespace Phacil\Core\Kernel;
 
 /**
  * Description of DispathCallback

@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Kernel;
+namespace Phacil\Core\Kernel;
 
 use Phacil\Architecture\Theme;
 use Phacil\Architecture\View;
@@ -38,6 +38,8 @@ class DispatchRender {
     private function __defineModuleControllerAction($match = null){
         
         $parts = $newparts = [];
+        
+        //pr($match);exit;
                
         if(!is_array($match)){
             $parts = explode('/', ltrim($match, '/'));

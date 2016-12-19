@@ -5,7 +5,7 @@
  * @author alisson
  */
 
-namespace Phacil\Routing;
+namespace Phacil\Core\Routing;
 
 use Phacil\HTTP\Request;
 

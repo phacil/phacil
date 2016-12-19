@@ -1,11 +1,13 @@
 <?php
-namespace Phacil\Kernel;
+namespace Phacil\Core\Kernel;
 
 use Phacil\Kernel\Dispatcher;
 use Phacil\Routing\Router;
-use Phacil\Component\HTML\Form;
+use Phacil\HTML\Form;
 use Phacil\HTTP\Response;
 use Phacil\HTTP\Request;
+use Phacil\Integration\Integration;
+use Phacil\Integration\ORM\ORMQuery;
 
 class App {
     
@@ -35,10 +37,20 @@ class App {
     public static final function run(\Closure $callbackRun){
         
         Form::registry('route', "\\Phacil\\Routing\\Route");
-        Form::registry('params', "\\Phacil\\HTTP\\Request");
-        Form::registry('data', "\\Phacil\\HTTP\\Request");
+        Form::registry('params', "\\Phacil\\Component\\HTTP\\Request");
+        Form::registry('data', "\\Phacil\\Component\\HTTP\\Request");
         
         Request::init();
+        
+        Integration::storeConnection([
+            'driver'=>'mysql',
+            'username'=>'root',
+            'password'=>'asd123',
+            'host'=>'localhost',
+            'database'=>'testes'
+        ], 'default');
+        
+        ORMQuery::$baseNamespace =  '\\'. BUSINESS_NAMESAPACE .'\\';
                
         call_user_func($callbackRun);
                           

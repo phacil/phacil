@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Client;
+namespace Phacil\Core\Client;
 
 /**
  * Description of RSSClient

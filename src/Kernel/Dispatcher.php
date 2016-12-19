@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Kernel;
+namespace Phacil\Core\Kernel;
 
 use Phacil\Routing\RouteMatcher;
 use Phacil\HTTP\Request;
@@ -12,7 +12,7 @@ class Dispatcher {
     public static function run($routesCollection = null, $response = null){ 
         
         $content = null;
-        $path = Request::getUrl();
+        $path = Request::getUri();
 //        pr($_SERVER);
 //        pr(Server::getAll());exit;
        
@@ -20,7 +20,7 @@ class Dispatcher {
             $matchedRoute = RouteMatcher::match($routesCollection, $path, Request::getMethod());
             
             $resolvedRoute = RouteResolver::resolve($matchedRoute);
-            //pr(Request::getUrl());exit;
+            //pr($resolvedRoute);exit;
                         
             $callback = $resolvedRoute->getCallback();
             $matches = $resolvedRoute->getMatches();

@@ -1,7 +1,7 @@
 <?php
-namespace Phacil\Architecture;
+namespace Phacil\Core\Architecture;
 
-use Phacil\Component\HTML\HTML as Html;
+use Phacil\HTML\HTML as Html;
 
 class Theme{
     

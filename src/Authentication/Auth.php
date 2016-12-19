@@ -1,5 +1,5 @@
 <?php
-namespace Phacil\Authentication;
+namespace Phacil\Core\Authentication;
 
 class Auth {
     //put your code here

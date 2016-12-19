@@ -1,12 +1,12 @@
 <?php
 
-namespace Phacil\Architecture;
+namespace Phacil\Core\Architecture;
 
-/**
- * Description of Model
- *
- * @author alisson
- */
-class Model {
-    //put your code here
+use Phacil\Integration\ORM\Model as PhacilModel;
+
+class Model extends PhacilModel{
+    
+    public function __construct() {
+        parent::__construct();
+    }
 }

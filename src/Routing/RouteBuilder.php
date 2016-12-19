@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Phacil\Routing;
+namespace Phacil\Core\Routing;
 
 use Phacil\HTTP\Request;
 

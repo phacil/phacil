@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Traits;
+namespace Phacil\Core\Traits;
 /**
  * Description of GetterTrait
  *

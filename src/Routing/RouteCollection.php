@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Routing;
+namespace Phacil\Core\Routing;
 
 /**
  * Description of RouteCollection

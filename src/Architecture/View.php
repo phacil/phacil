@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Architecture;
+namespace Phacil\Core\Architecture;
 
 class View{
     

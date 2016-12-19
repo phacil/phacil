@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Phacil\\": "src/"
+            "Phacil\\Core\\": "src/"
         },
         "files": ["src/functions.inc.php"]
     }

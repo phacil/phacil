@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Phacil\Client;
+namespace Phacil\Core\Client;
 
 /**
  * Description of SSH
