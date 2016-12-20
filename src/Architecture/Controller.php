@@ -1,7 +1,7 @@
 <?php
 namespace Phacil\Core\Architecture;
 
-use Phacil\Kernel\App;
+use Phacil\Core\Kernel\App;
 use Phacil\Integration\Integration;
 
 class Controller {
