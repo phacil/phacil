@@ -65,6 +65,11 @@ class RouteBuilder {
         return $this;
     }
     
+    public function redirect(){
+        header('location: ' . $this->output());
+        exit;
+    }
+    
     public function output(){
         return $this->__toString();
     }
@@ -93,5 +98,5 @@ class RouteBuilder {
         }
        
         return ROOT_URL . join('/', $out);
-    } 
+    }
 }

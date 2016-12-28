@@ -36,13 +36,13 @@ class App {
     
     public static final function run(\Closure $callbackRun){
         
-        Form::registry('route', "\\Phacil\\Routing\\Route");
-        Form::registry('params', "\\Phacil\\Component\\HTTP\\Request");
-        Form::registry('data', "\\Phacil\\Component\\HTTP\\Request");
+        Form::registry('route', "\\Phacil\\Core\\Routing\\Route");
+        Form::registry('params', "\\Phacil\\HTTP\\Request");
+        Form::registry('data', "\\Phacil\\HTTP\\Request");
         
         Request::init();
         
-        Integration::storeConnection([
+        Integration::storeConfig([
             'driver'=>'mysql',
             'username'=>'root',
             'password'=>'asd123',

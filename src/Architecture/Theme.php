@@ -2,6 +2,7 @@
 namespace Phacil\Core\Architecture;
 
 use Phacil\HTML\HTML as Html;
+use Phacil\Core\Exception\PhacilException;
 
 class Theme{
     
@@ -22,7 +23,7 @@ class Theme{
             }
 
             if(!is_file($viewPath . $view . '.htp')){
-                throw new Phacil\Core\Exception\PhacilException('View '. $view . ' not found');
+                throw new PhacilException('View '. $view . ' not found');
             }
             
             include($viewPath . $view . '.htp');
@@ -39,11 +40,11 @@ class Theme{
             }
 
             if(!is_dir(THEMES_DIR . self::$name)){
-                throw new Phacil\Core\Exception\PhacilException('Theme '. self::$name . ' not found');
+                throw new PhacilException('Theme '. self::$name . ' not found');
             }
             
             if(!is_file(THEMES_DIR . self::$name . DS . $layout. '.php')){
-                throw new Phacil\Core\Exception\PhacilException('Layout '. $layout . ' not found');
+                throw new PhacilException('Layout '. $layout . ' not found');
             }
             
             include THEMES_DIR . self::$name . DS . $layout. '.php';

@@ -79,3 +79,7 @@ if (!function_exists('from_file_json')){
         return json_decode(file_get_contents($file .'.json'), true);
     }
 }
+
+function phacil_version(){
+    return '0.3.3';
+}
