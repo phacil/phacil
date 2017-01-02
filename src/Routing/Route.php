@@ -7,8 +7,6 @@
 
 namespace Phacil\Core\Routing;
 
-use Phacil\HTTP\Request;
-
 class Route {
     
     protected $method = null;

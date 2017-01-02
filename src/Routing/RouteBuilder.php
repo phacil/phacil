@@ -14,6 +14,7 @@ class RouteBuilder {
     
     private $url = [];
     private $request = [];
+    private $indexMethod = 'index';
 
     public function __construct($url = '/') {
         $this->request = Request::info();
@@ -49,7 +50,9 @@ class RouteBuilder {
     
     public function action($action = ''){
         $this->initRequestInfo(array('prefix', 'module', 'controller'));
-        $this->url['action'] = $action;
+        if($action != $this->indexMethod){
+            $this->url['action'] = $action;
+        }        
         return $this;
     }
     
