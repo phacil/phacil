@@ -24,6 +24,9 @@
         "psr-4": {
             "Phacil\\Core\\": "src/"
         },
-        "files": ["src/functions.inc.php"]
+        "files": [
+            "src/functions.inc.php", 
+            "src/helpers.inc.php"
+        ]
     }
 }
