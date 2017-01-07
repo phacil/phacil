@@ -81,5 +81,5 @@ if (!function_exists('from_file_json')){
 }
 
 function phacil_version(){
-    return '0.3.4';
+    return '0.4.2';
 }

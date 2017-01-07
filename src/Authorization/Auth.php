@@ -6,6 +6,7 @@ use Phacil\Core\Routing\Route;
 use Phacil\Core\Routing\RouteBuilder;
 use Phacil\HTTP\Request;
 use Phacil\Core\Exception\PhacilException;
+use Phacil\Core\Architecture\Flash;
 
 class Auth {
     
@@ -42,7 +43,7 @@ class Auth {
             }
         }else{
             
-            Session::setMessage(self::$notCanLoginMessage, 'auth');
+            Flash::message(self::$notCanLoginMessage, 'auth');
             if($redirect){
                 Route::url(self::$loginRedirect)->redirect();
             }
@@ -66,7 +67,7 @@ class Auth {
               
             )
         {
-            Session::setMessage(self::$notAuthorizedMessage, 'auth');
+            Flash::message(self::$notAuthorizedMessage, 'auth');
             Route::url(self::$loginRedirect)->redirect();
         }
     }

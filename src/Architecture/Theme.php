@@ -6,8 +6,15 @@ use Phacil\Core\Exception\PhacilException;
 
 class Theme{
     
+    use \Phacil\Core\Traits\InstanceTrait;
+    
     protected static $name = 'default';
     protected static $asset_dir = 'assets';
+    
+    public function __construct() {
+        self::$instance = $this;
+        return $this;
+    }
     
     public static function getName(){
         return self::$name;

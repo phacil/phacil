@@ -4,11 +4,18 @@ namespace Phacil\Core\Architecture;
 
 class View{
     
+    use \Phacil\Core\Traits\InstanceTrait;
+    
     protected static $name = false;
     protected static $layout = 'default';
     protected static $viewsPath = '';
     
     protected static $vars = [];
+    
+    public function __construct() {
+        self::$instance = $this;
+        return $this;
+    }
     
     public static function setName($value = null){
         self::$name = filter_var($value, FILTER_SANITIZE_STRING);
