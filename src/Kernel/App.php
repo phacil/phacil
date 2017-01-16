@@ -11,10 +11,13 @@ use Phacil\Integration\ORM\ORMQuery;
 
 class App {
     
-    use \Phacil\Core\Traits\Setter,
-        \Phacil\Core\Traits\Getter;
-    
-    protected static $__vars = [];
+    use \Phacil\Core\Traits\StaticGetterSetter,
+        \Phacil\Core\Traits\InstanceTrait;
+
+    public function __construct(){
+        self::$instance = $this;
+        return $this;
+    }
     
     public static function debug($mode = false) {
         
@@ -42,18 +45,14 @@ class App {
         
         Request::init();
         
-        Integration::storeConfig([
-            'driver'=>'mysql',
-            'username'=>'root',
-            'password'=>'asd123',
-            'host'=>'localhost',
-            'database'=>'testes'
-        ], 'default');
-        
         ORMQuery::$baseNamespace =  '\\'. BUSINESS_NAMESAPACE .'\\';
                
         call_user_func($callbackRun);
-                          
+        
+        foreach (App::get('Config.datasources') as $config => $source) {
+            Integration::storeConfig($source, $config);
+        }
+                                  
         return Dispatcher::run( Router::routesCollection(),
                                 new Response());
     }

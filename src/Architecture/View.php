@@ -4,52 +4,40 @@ namespace Phacil\Core\Architecture;
 
 class View{
     
-    use \Phacil\Core\Traits\InstanceTrait;
+    use \Phacil\Core\Traits\InstanceTrait, 
+        \Phacil\Core\Traits\StaticGetterSetter;
     
     protected static $name = false;
     protected static $layout = 'default';
     protected static $viewsPath = '';
-    
-    protected static $vars = [];
-    
+        
     public function __construct() {
         self::$instance = $this;
         return $this;
     }
     
-    public static function setName($value = null){
-        self::$name = filter_var($value, FILTER_SANITIZE_STRING);
+    public static function name($name = false){
+        if($name == false){
+            return self::$name;
+        }
+        self::$name = filter_var($name, FILTER_SANITIZE_STRING);
+    }
+            
+    public static function layout($layout = false){
+        if($layout == false){
+            return self::$layout;
+        }
+        self::$layout = filter_var($layout, FILTER_SANITIZE_STRING);
     }
     
-    public static function getName(){
-        return self::$name;
-    }
-    
-    public static function setLayout($value = null){
-        self::$layout = filter_var($value, FILTER_SANITIZE_STRING);
-    }
-    
-    public static function getlayout(){
-        return self::$layout;
-    }
-    
-    public static function setViewsPath($value = null){
-        self::$viewsPath = filter_var($value, FILTER_SANITIZE_STRING);
-    }
-    
-    public static function getViewsPath(){
-        return self::$viewsPath;
+    public static function viewsPath($viewsPath = false){
+        if($viewsPath == false){
+            return self::$viewsPath;
+        }
+        self::$viewsPath = filter_var($viewsPath, FILTER_SANITIZE_STRING);
     }
 
-    public static function set($var, $value = null){
-        self::$vars[filter_var($var, FILTER_SANITIZE_STRING)] = $value;
-    }
-    
-    public static function get($var){
-        return self::$vars[$var];
-    }
-    
-    public static function getVars(){
-        return self::$vars;
+    public static function vars(){
+        return self::$conteiner;
     }
 }

@@ -64,9 +64,9 @@ class DispatchRender {
             $newparts[] = ucfirst($parts[0]) . '\\' . ucfirst($parts[1]);
             $newparts[] = isset($parts[2])?$parts[2]:'index';
             
-            Request::setModule($parts[0]);
-            Request::setController($parts[1]);
-            Request::setAction(isset($parts[2])?$parts[2]:'index');
+            Request::module($parts[0]);
+            Request::controller($parts[1]);
+            Request::action(isset($parts[2])?$parts[2]:'index');
             
             unset($parts[0]);
             unset($parts[1]);
@@ -77,8 +77,8 @@ class DispatchRender {
             $newparts[] = ucfirst($parts[0]);
             $newparts[] = isset($parts[1])?$parts[1]:'index';
            
-            Request::setController($parts[0]);
-            Request::setAction(isset($parts[1])?$parts[1]:'index');
+            Request::controller($parts[0]);
+            Request::action(isset($parts[1])?$parts[1]:'index');
             
             unset($parts[0]);
             unset($parts[1]);
@@ -87,37 +87,39 @@ class DispatchRender {
         }
         
         list($_params, $_args) = $this->__diffRequestArgs($parts);
-        Request::setParams($_params);
-        Request::setArgs($_args);
+        Request::params($_params);
+        Request::args($_args);
         //pr(Request::info());       
         return [$newparts, $_params];
     } 
     
     private function __render($callback, $params = []){
 
-	$controllerPath = '\\' . BUSINESS_NAMESAPACE . "\\" . $callback[0] . '\\' . ucwords(Request::getController());
+	$controllerPath = '\\' . BUSINESS_NAMESAPACE . "\\" . $callback[0] . '\\' . ucwords(Request::controller());
         
         $objController = new $controllerPath();
         
-        if(!method_exists($objController, Request::getAction())){
-            throw new Phacil\Core\Exception\PhacilException('Action '. Request::getAction() . ' not found');
+        if(!method_exists($objController, Request::action())){
+            throw new Phacil\Core\Exception\PhacilException('Action '. Request::action() . ' not found');
         }
         
-        call_user_func_array(array($objController, Request::getAction()), $params);
+        call_user_func_array(array($objController, Request::action()), $params);
         
-        View::setName(!empty(View::getName())?View::getName():Request::getAction());
+        unset($objController);
+        
+        View::name(!empty(View::name())?View::name():Request::action());
 	        
-        View::setViewsPath(!empty(View::getViewsPath())?View::getViewsPath()
+        View::viewsPath(!empty(View::viewsPath())?View::viewsPath()
                 : BUSINESS_DIR 
-                . ucwords(Request::getModule()) 
+                . ucwords(Request::module())
                 . DS 
-                . ucwords(Request::getController()) 
+                . ucwords(Request::controller())
                 . DS);
         
-        return Theme::includeLayoutViewOnTheme(View::getLayout(), 
-                                        View::getViewsPath() , 
-                                        View::getName(), 
-                                        View::getVars());
+        return Theme::includeLayoutViewOnTheme(View::layout(), 
+                                        View::viewsPath(), 
+                                        View::name(), 
+                                        View::vars());
     }
     
     public function run(){

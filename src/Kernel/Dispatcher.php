@@ -5,19 +5,18 @@ namespace Phacil\Core\Kernel;
 use Phacil\Core\Routing\RouteMatcher;
 use Phacil\HTTP\Request;
 use Phacil\Core\Routing\RouteResolver;
-use Phacil\HTTP\Server;
 
 class Dispatcher {
     
     public static function run($routesCollection = null, $response = null){ 
         
         $content = null;
-        $path = Request::getUri();
+        $path = Request::uri();
 //        pr($_SERVER);
 //        pr(Server::getAll());exit;
        
         //try{
-            $matchedRoute = RouteMatcher::match($routesCollection, $path, Request::getMethod());
+            $matchedRoute = RouteMatcher::match($routesCollection, $path, Request::method());
             
             $resolvedRoute = RouteResolver::resolve($matchedRoute);
             //pr($resolvedRoute);exit;

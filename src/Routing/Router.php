@@ -4,11 +4,16 @@ namespace Phacil\Core\Routing;
 
 class Router {
     
-    protected static $requestUri = null;
-
-    protected static $routes = [];
+    use \Phacil\Core\Traits\InstanceTrait;
     
+    protected static $requestUri = null;
+    protected static $routes = [];    
     protected static $mapPrefix = '/';
+    
+    public function __construct() {
+        self::$instance = $this;
+        return $this;
+    }
     
     public static function routesCollection(){
         return self::$routes;
