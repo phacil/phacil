@@ -85,7 +85,7 @@ class DispatchRender {
             unset($parts[0]);
             unset($parts[1]);
         }else{
-            throw new Phacil\Core\Exception\PhacilException('Controller not found');
+            throw new \Phacil\Core\Exception\PhacilException('Controller not found');
         }
         
         list($_params, $_args) = $this->__diffRequestArgs($parts);
