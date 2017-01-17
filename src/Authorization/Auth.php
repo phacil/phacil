@@ -34,7 +34,13 @@ class Auth {
                 throw new PhacilException('Objeto não reconhecido');
             }
             
-            if(current($cred[1]) === $objUser->{key($cred[1])}){
+            $options = [
+                'salt' => app()->get('Config.Salt'),
+            ];
+
+            $hash = password_hash(current($cred[1]), PASSWORD_BCRYPT, $options);
+            
+            if($hash == $objUser->{key($cred[1])}){
                 Session::set("Auth", $objUser);
                 
                 if($redirect){
@@ -48,14 +54,14 @@ class Auth {
                 }               
                 return true;
             }
-        }else{
-            
-            flash()->message(self::$notCanLoginMessage)->id('auth');
-            if($redirect){
-                Route::url(self::$loginRedirect)->redirect();
-            }
-            return false;
         }
+            
+        flash()->message(self::$notCanLoginMessage)->id('auth');
+        if($redirect){
+            Route::url(self::$loginRedirect)->redirect();
+        }
+        return false;
+        
     }
     
     public static function logout(){

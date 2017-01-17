@@ -59,7 +59,9 @@ class DispatchRender {
         $this->__discardGetArgs($parts);
                 
         //pr($parts);exit;
+        //Verifica se é parte de um prefixo
         
+        //Verifica se é parte de um modulo
         if(isset($parts[1]) &&  is_file(BUSINESS_DIR . DS . ucfirst($parts[0]) . DS. ucfirst($parts[1]) . DS . ucfirst($parts[1]) . '.php')){
             $newparts[] = ucfirst($parts[0]) . '\\' . ucfirst($parts[1]);
             $newparts[] = isset($parts[2])?$parts[2]:'index';
@@ -72,7 +74,7 @@ class DispatchRender {
             unset($parts[1]);
             unset($parts[2]);
         }
-       
+        //Verifica se é um controle direto
         else if(is_file(BUSINESS_DIR . DS . ucfirst($parts[0]) . DS . ucfirst($parts[0]) . '.php')){
             $newparts[] = ucfirst($parts[0]);
             $newparts[] = isset($parts[1])?$parts[1]:'index';
