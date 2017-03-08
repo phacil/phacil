@@ -8,6 +8,7 @@ use Phacil\HTTP\Response;
 use Phacil\HTTP\Request;
 use Phacil\Integration\Integration;
 use Phacil\Integration\ORM\ORMQuery;
+use Phacil\Integration\ORM\Validator;
 
 class App {
     
@@ -37,6 +38,10 @@ class App {
         }
     }
     
+    private static function ModifieidSalt($salt){
+        return $salt != 'WPMNxcytVVPquMWMU6Hf56';
+    }
+
     public static final function run(\Closure $callbackRun){
         
         Form::registry('route', "\\Phacil\\Core\\Routing\\Route");
@@ -48,6 +53,12 @@ class App {
         ORMQuery::$baseNamespace =  '\\'. BUSINESS_NAMESAPACE .'\\';
                
         call_user_func($callbackRun);
+        
+        $saltModified = self::ModifieidSalt(App::get('Config.Salt'));        
+        App::set('Salt.modified',$saltModified);
+        
+        Validator::setErrorsFolderValidate(App::get('Validator.folder'));
+        Validator::setDefaultLang(App::get('Validator.lang'));
         
         foreach (App::get('Config.datasources') as $config => $source) {
             Integration::storeConfig($source, $config);
