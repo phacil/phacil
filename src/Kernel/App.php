@@ -1,5 +1,5 @@
 <?php
-namespace Phacil\Core\Kernel;
+namespace Phacil\Core\Kernel; 
 
 use Phacil\Core\Kernel\Dispatcher;
 use Phacil\Core\Routing\Router;
