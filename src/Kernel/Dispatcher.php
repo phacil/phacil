@@ -33,6 +33,7 @@ class Dispatcher {
                 $dispathRender = new DispatchRender($callback, $matches, $namedArgs);
                 $content = $dispathRender->run();
             }else{
+
                 throw new PhacilException('Error Callback Router');
             }
             $response->setContent($content);
