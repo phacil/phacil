@@ -9,60 +9,12 @@ class Theme{
     use \Phacil\Core\Traits\InstanceTrait;
     
     protected static $name = 'default';
+    protected static $layout = 'default';
     protected static $asset_dir = 'assets';
     
     public function __construct() {
         self::$instance = $this;
         return $this;
-    }
-    
-    public static function getName(){
-        return self::$name;
-    }
-        	
-    public static function loadView($viewPath, $view, $vars){
-       
-        return Html::buffer(function() use ($viewPath, $view, $vars){
-                foreach($vars as $var => $value){
-                if(!isset($$var)){
-                    $$var = $value;  
-                } 
-            }
-
-            if(!is_file($viewPath . $view . '.htp')){
-                throw new PhacilException('View '. $view . ' not found');
-            }
-            
-            include($viewPath . $view . '.htp');
-        });
-        
-    }
-	
-    public static function includeLayout($layout = '', $content = '', $vars = ''){
-        //return Html::buffer(function() use ($layout, $vars){
-            foreach($vars as $var => $value){
-                if(!isset($$var)){
-                    $$var = $value;  
-                }
-            }
-
-            if(!is_dir(THEMES_DIR . self::$name)){
-                throw new PhacilException('Theme '. self::$name . ' not found');
-            }
-            
-            if(!is_file(THEMES_DIR . self::$name . DS . $layout. '.php')){
-                throw new PhacilException('Layout '. $layout . ' not found');
-            }
-            
-            include THEMES_DIR . self::$name . DS . $layout. '.php';
-        //});        
-    }
-    
-    public static function includeLayoutViewOnTheme($layout = null, $viewPath = null, $view = null, $vars = array()){
-        return Html::buffer(function() use ($layout,$viewPath, $view, $vars){
-            $content = self::loadView($viewPath, $view, $vars);
-            self::includeLayout($layout, $content, $vars);
-        });
     }
     
     public static function css($param = array()) {
@@ -109,5 +61,46 @@ class Theme{
     
     public static function image($param = '') {
         return Html::img()->src(THEMES_URL. self::$name . '/' . self::$asset_dir . '/images/' . $param);
+    }
+    
+    public static function name($name = null){
+        if(is_null($name)){
+            return self::$name;
+        }
+        self::$view = $name;
+    }
+    
+    public static function layout($layout = null){
+        if(is_null($layout)){
+            return self::$layout;
+        }
+        self::$view = $layout;
+    }
+    
+    public static function assets($asset_dir = null){
+        if(is_null($asset_dir)){
+            return self::$asset_dir;
+        }
+        self::$view = $asset_dir;
+    }
+    
+    public static function sublayout($sublayout, $vars = []){
+        return html()->buffer(function() use ($sublayout, $vars){
+            foreach($vars as $var => $value){
+                if(!isset($$var)){
+                    $$var = $value;  
+                }
+            }
+           
+            if(!is_dir(THEMES_DIR . theme()->name())){
+                throw new PhacilException('Theme '. theme()->name() . ' not found');
+            }
+            
+            if(!is_file(THEMES_DIR . theme()->name() . DS . 'sublayouts' . DS . $sublayout. '.php')){
+                throw new PhacilException('Sublayout '. $sublayout . ' not found');
+            }
+            
+            include THEMES_DIR . theme()->name() . DS . 'sublayouts' . DS . $sublayout. '.php';
+        });
     }
 }

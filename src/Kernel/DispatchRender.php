@@ -2,8 +2,6 @@
 
 namespace Phacil\Core\Kernel;
 
-use Phacil\Core\Architecture\Theme;
-use Phacil\Core\Architecture\View;
 use Phacil\HTTP\Request;
 use Phacil\Core\Exception\PhacilException;
 
@@ -94,7 +92,51 @@ class DispatchRender {
         Request::args($_args);
         //pr(Request::info());       
         return [$newparts, $_params];
-    } 
+    }
+    
+    private function loadView($viewPath, $view, $vars){
+       
+        return html()->buffer(function() use ($viewPath, $view, $vars){
+                foreach($vars as $var => $value){
+                if(!isset($$var)){
+                    $$var = $value;  
+                } 
+            }
+            
+            if(!is_file($viewPath . $view . '.htp')){
+                throw new PhacilException('View '. $view . ' not found');
+            }
+            
+            include($viewPath . $view . '.htp');
+        });
+    }
+	
+    private function includeLayout($layout = '', $content = '', $vars = []){
+        //return html()->buffer(function() use ($layout, $vars){
+            foreach($vars as $var => $value){
+                if(!isset($$var)){
+                    $$var = $value;  
+                }
+            }
+
+            if(!is_dir(THEMES_DIR . theme()->name())){
+                throw new PhacilException('Theme '. theme()->name() . ' not found');
+            }
+            
+            if(!is_file(THEMES_DIR . theme()->name() . DS . 'layouts' . DS . $layout. '.php')){
+                throw new PhacilException('Layout '. $layout . ' not found');
+            }
+            
+            include THEMES_DIR . theme()->name() . DS . 'layouts' . DS . $layout. '.php';
+        //});        
+    }
+    
+    private function includeLayoutViewOnTheme($layout = null, $viewPath = null, $view = null, $vars = array()){
+        return html()->buffer(function() use ($layout,$viewPath, $view, $vars){
+            $content = $this->loadView($viewPath, $view, $vars);
+            $this->includeLayout($layout, $content, $vars);
+        });
+    }
     
     private function __render($callback, $params = []){
 
@@ -106,23 +148,21 @@ class DispatchRender {
             throw new PhacilException('Action '. Request::action() . ' not found');
         }
         
+        view()->name(!empty(view()->name())?view()->name():Request::action());
+	        
+        view()->viewsPath(!empty(view()->viewsPath())?view()->viewsPath()
+                : (!is_null(Request::module())?ucwords(Request::module()).DS:'')                
+                . ucwords(Request::controller())
+                . DS);
+        
         call_user_func_array(array($objController, Request::action()), $params);
         
         unset($objController);
         
-        View::name(!empty(View::name())?View::name():Request::action());
-	        
-        View::viewsPath(!empty(View::viewsPath())?View::viewsPath()
-                : BUSINESS_DIR 
-                . ucwords(Request::module())
-                . DS 
-                . ucwords(Request::controller())
-                . DS);
-        
-        return Theme::includeLayoutViewOnTheme(View::layout(), 
-                                        View::viewsPath(), 
-                                        View::name(), 
-                                        View::vars());
+        return $this->includeLayoutViewOnTheme(theme()->layout(), 
+                                        view()->viewsPath(), 
+                                        view()->name(), 
+                                        view()->vars());
     }
     
     public function run(){

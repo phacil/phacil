@@ -33,12 +33,8 @@ class Auth {
             }else{
                 throw new PhacilException('Objeto não reconhecido');
             }
-            
-            $options = [
-                'salt' => app()->get('Config.Salt'),
-            ];
-
-            $hash = password_hash(current($cred[1]), PASSWORD_BCRYPT, $options);
+           
+            $hash = self::password(current($cred[1]));
             
             if($hash == $objUser->{key($cred[1])}){
                 Session::set("Auth", $objUser);
@@ -73,7 +69,7 @@ class Auth {
         if (self::isPublic(Request::info('uri'))){
             return;
         }
-        
+
         if (  (!self::isLogged() && Request::info('uri') != rtrim(self::$loginRoute, '/')) 
               || 
               (self::isLogged() && !self::isAllowed(Request::info('uri')))
@@ -166,12 +162,24 @@ class Auth {
         self::$loginRedirect = $route;
     }
     
+    public static function loginRoute($route){
+        self::$loginRoute = $route;
+    }
+    
     public static function getLogged(){        
         return Session::check("Auth")?Session::get("Auth"):false;
     }
     
     public static function isLogged(){
         return Session::check("Auth")?true:false;
+    }
+    
+    public static function password($pass){
+        $options = [
+            'salt' => app()->get('Config.Salt'),
+        ];
+
+        return password_hash($pass, PASSWORD_BCRYPT, $options);
     }
     
     private static function __parseRoute($route){
