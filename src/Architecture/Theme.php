@@ -74,18 +74,18 @@ class Theme{
         if(is_null($layout)){
             return self::$layout;
         }
-        self::$view = $layout;
+        self::$layout = $layout;
     }
     
     public static function assets($asset_dir = null){
         if(is_null($asset_dir)){
             return self::$asset_dir;
         }
-        self::$view = $asset_dir;
+        self::$asset_dir = $asset_dir;
     }
     
-    public static function sublayout($sublayout, $vars = []){
-        return html()->buffer(function() use ($sublayout, $vars){
+    public static function piece($piece, $vars = []){
+        return html()->buffer(function() use ($piece, $vars){
             foreach($vars as $var => $value){
                 if(!isset($$var)){
                     $$var = $value;  
@@ -96,11 +96,11 @@ class Theme{
                 throw new PhacilException('Theme '. theme()->name() . ' not found');
             }
             
-            if(!is_file(THEMES_DIR . theme()->name() . DS . 'sublayouts' . DS . $sublayout. '.php')){
-                throw new PhacilException('Sublayout '. $sublayout . ' not found');
+            if(!is_file(THEMES_DIR . theme()->name() . DS . 'pieces' . DS . $piece. '.php')){
+                throw new PhacilException('Piece '. $piece . ' not found');
             }
             
-            include THEMES_DIR . theme()->name() . DS . 'sublayouts' . DS . $sublayout. '.php';
+            include THEMES_DIR . theme()->name() . DS . 'pieces' . DS . $piece. '.php';
         });
     }
 }

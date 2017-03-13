@@ -123,11 +123,11 @@ class DispatchRender {
                 throw new PhacilException('Theme '. theme()->name() . ' not found');
             }
             
-            if(!is_file(THEMES_DIR . theme()->name() . DS . 'layouts' . DS . $layout. '.php')){
+            if(!is_file(THEMES_DIR . theme()->name() . DS . $layout. '.php')){
                 throw new PhacilException('Layout '. $layout . ' not found');
             }
             
-            include THEMES_DIR . theme()->name() . DS . 'layouts' . DS . $layout. '.php';
+            include THEMES_DIR . theme()->name() . DS . $layout. '.php';
         //});        
     }
     
