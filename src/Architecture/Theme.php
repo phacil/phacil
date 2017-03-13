@@ -67,7 +67,7 @@ class Theme{
         if(is_null($name)){
             return self::$name;
         }
-        self::$view = $name;
+        self::$name = $name;
     }
     
     public static function layout($layout = null){
