@@ -5,7 +5,7 @@
  * @author alisson
  */
 
-namespace Phacil\Core\Routing;
+namespace Phacil\Routing;
 
 class Route {
     

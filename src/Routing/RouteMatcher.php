@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Core\Routing;
+namespace Phacil\Routing;
 
 class RouteMatcher {
     
@@ -25,7 +25,7 @@ class RouteMatcher {
             }
         }
         if($exception){
-            throw new \Phacil\Core\Exception\PhacilException('Rota não encontrada');
+            throw new \Phacil\Exception\PhacilException('Rota não encontrada');
         }
         return false;        
     } 

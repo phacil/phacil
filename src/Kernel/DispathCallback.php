@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Core\Kernel;
+namespace Phacil\Kernel;
 
 class DispathCallback {
     

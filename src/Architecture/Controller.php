@@ -1,12 +1,12 @@
 <?php
-namespace Phacil\Core\Architecture;
+namespace Phacil\Architecture;
 
-use Phacil\Core\Kernel\App;
+use Phacil\Kernel\App;
 
 class Controller {
     
     public function __construct(){
         View::set('theme_title', App::get('controller'));
-        //Integration::$dbConfig = 'default';       
+        //Integration::$dbConfig = 'default';
     }
 } 

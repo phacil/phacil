@@ -1,8 +1,8 @@
 <?php
-namespace Phacil\Core\Kernel; 
+namespace Phacil\Kernel; 
 
-use Phacil\Core\Kernel\Dispatcher;
-use Phacil\Core\Routing\Router;
+use Phacil\Kernel\Dispatcher;
+use Phacil\Routing\Router;
 use Phacil\HTML\Form;
 use Phacil\HTTP\Response;
 use Phacil\HTTP\Request;
@@ -12,8 +12,8 @@ use Phacil\Integration\ORM\Validator;
 
 class App {
     
-    use \Phacil\Core\Traits\StaticGetterSetter,
-        \Phacil\Core\Traits\InstanceTrait;
+    use \Phacil\Common\Traits\StaticGetterSetter,
+        \Phacil\Common\Traits\InstanceTrait;
 
     public function __construct(){
         self::$instance = $this;

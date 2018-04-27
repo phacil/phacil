@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Core\Routing;
+namespace Phacil\Routing;
 
 class RouteResolver {
     

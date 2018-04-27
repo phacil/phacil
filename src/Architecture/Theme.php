@@ -1,12 +1,12 @@
 <?php
-namespace Phacil\Core\Architecture;
+namespace Phacil\Architecture;
 
 use Phacil\HTML\HTML as Html;
-use Phacil\Core\Exception\PhacilException;
+use Phacil\Exception\PhacilException;
 
 class Theme{
     
-    use \Phacil\Core\Traits\InstanceTrait;
+    use \Phacil\Common\Traits\InstanceTrait;
     
     protected static $name = 'default';
     protected static $layout = 'default';

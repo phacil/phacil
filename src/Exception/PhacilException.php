@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Core\Exception;
+namespace Phacil\Exception;
 
 class PhacilException extends \Exception{
     // Redefine a exceção de forma que a mensagem não seja opcional

@@ -1,12 +1,12 @@
 <?php
-namespace Phacil\Core\Authorization;
+namespace Phacil\Authorization;
 
 use Phacil\HTTP\Session;
-use Phacil\Core\Routing\Route;
-use Phacil\Core\Routing\RouteBuilder;
-use Phacil\Core\Routing\RouteMatcher;
+use Phacil\Routing\Route;
+use Phacil\Routing\RouteBuilder;
+use Phacil\Routing\RouteMatcher;
 use Phacil\HTTP\Request;
-use Phacil\Core\Exception\PhacilException;
+use Phacil\Exception\PhacilException;
 
 class Auth {
     

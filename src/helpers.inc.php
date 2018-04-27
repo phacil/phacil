@@ -1,16 +1,16 @@
 <?php
 
-use Phacil\Core\Kernel\App;
-use Phacil\Core\Architecture\Flash;
-use Phacil\Core\Architecture\View;
-use Phacil\Core\Architecture\Theme;
-use Phacil\Core\Exception\PhacilException;
-use Phacil\Core\Routing\RouteBuilder;
-use Phacil\Core\Routing\Router;
+use Phacil\Kernel\App;
+use Phacil\Architecture\Flash;
+use Phacil\Architecture\View;
+use Phacil\Architecture\Theme;
+use Phacil\Exception\PhacilException;
+use Phacil\Routing\RouteBuilder;
+use Phacil\Routing\Router;
 
 /**
  * 
- * @return Phacil\Core\Kernel\App
+ * @return Phacil\Kernel\App
  */
 function app()
 {
@@ -25,7 +25,7 @@ function app()
  * @param type $message
  * @param type $code
  * @param Exception $previous
- * @return Phacil\Core\Exception\PhacilException
+ * @return Phacil\Exception\PhacilException
  */
 function exception($message, $code = 0, Exception $previous = null)
 {
@@ -34,7 +34,7 @@ function exception($message, $code = 0, Exception $previous = null)
 
 /**
  * 
- * @return Phacil\Core\Architecture\Flash
+ * @return Phacil\Architecture\Flash
  */
 function flash()
 {

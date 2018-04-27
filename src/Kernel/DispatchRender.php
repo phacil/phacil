@@ -1,9 +1,9 @@
 <?php
 
-namespace Phacil\Core\Kernel;
+namespace Phacil\Kernel;
 
 use Phacil\HTTP\Request;
-use Phacil\Core\Exception\PhacilException;
+use Phacil\Exception\PhacilException;
 
 class DispatchRender {
     

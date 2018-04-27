@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Core\Client;
+namespace Phacil\Client;
 
 class REST {
 

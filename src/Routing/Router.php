@@ -1,10 +1,10 @@
 <?php
 
-namespace Phacil\Core\Routing;
+namespace Phacil\Routing;
 
 class Router {
     
-    use \Phacil\Core\Traits\InstanceTrait;
+    use \Phacil\Common\Traits\InstanceTrait;
     
     protected static $requestUri = null;
     protected static $routes = [];    

@@ -1,6 +1,6 @@
 <?php
 
-namespace Phacil\Core\Architecture;
+namespace Phacil\Architecture;
 
 use Phacil\HTTP\Session;
 

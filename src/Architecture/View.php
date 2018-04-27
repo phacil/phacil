@@ -1,13 +1,13 @@
 <?php
 
-namespace Phacil\Core\Architecture;
+namespace Phacil\Architecture;
 use Phacil\HTML\HTML;
-use Phacil\Core\Exception\PhacilException;
+use Phacil\Exception\PhacilException;
 
 class View{
     
-    use \Phacil\Core\Traits\InstanceTrait, 
-        \Phacil\Core\Traits\StaticGetterSetter;
+    use \Phacil\Common\Traits\InstanceTrait, 
+        \Phacil\Common\Traits\StaticGetterSetter;
     
     protected static $name = false;
     protected static $viewsPath = '';
