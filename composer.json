@@ -12,10 +12,9 @@
     "require": {
         "php": ">=5.5",
         "filp/whoops": "^2.1",
-        "phacil/common": "dev-development",
-        "phacil/html": "dev-development",
-        "phacil/http": "dev-development",
-        "phacil/integration": "dev-development"
+        "phacil/common": "dev-master",
+        "phacil/html": "dev-master",
+        "phacil/http": "dev-master"
     },
     "repositories": [
         {
