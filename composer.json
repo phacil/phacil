@@ -12,15 +12,10 @@
     "require": {
         "php": ">=5.5",
         "filp/whoops": "^2.1",
-        "phacil/common": "dev-master",
         "phacil/html": "dev-master",
         "phacil/http": "dev-master"
     },
     "repositories": [
-        {
-            "type": "vcs",
-            "url":  "https://github.com/phacil/common.git"
-        },
         {
             "type": "vcs",
             "url":  "https://github.com/phacil/html.git"
@@ -28,10 +23,6 @@
         {
             "type": "vcs",
             "url":  "https://github.com/phacil/http.git"
-        },
-        {
-            "type": "vcs",
-            "url":  "https://github.com/phacil/integration.git"
         }
     ],
     "autoload": {

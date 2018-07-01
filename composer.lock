@@ -4,21 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2247b48cb087b4455b41dcdf0ebdc85d",
-    "content-hash": "93cd3c68b99d26933cfcc1de8a23cb2a",
+    "content-hash": "efc6ef811338e2fbb80b4a5fcf62f113",
     "packages": [
         {
             "name": "filp/whoops",
-            "version": "2.1.14",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "c6081b8838686aa04f1e83ba7e91f78b7b2a23e6"
+                "reference": "181c4502d8f34db7aed7bfe88d4f87875b8e947a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/c6081b8838686aa04f1e83ba7e91f78b7b2a23e6",
-                "reference": "c6081b8838686aa04f1e83ba7e91f78b7b2a23e6",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/181c4502d8f34db7aed7bfe88d4f87875b8e947a",
+                "reference": "181c4502d8f34db7aed7bfe88d4f87875b8e947a",
                 "shasum": ""
             },
             "require": {
@@ -26,9 +25,9 @@
                 "psr/log": "^1.0.1"
             },
             "require-dev": {
-                "mockery/mockery": "0.9.*",
+                "mockery/mockery": "^0.9 || ^1.0",
                 "phpunit/phpunit": "^4.8.35 || ^5.7",
-                "symfony/var-dumper": "^2.6 || ^3.0"
+                "symfony/var-dumper": "^2.6 || ^3.0 || ^4.0"
             },
             "suggest": {
                 "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
@@ -37,7 +36,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -66,7 +65,7 @@
                 "throwable",
                 "whoops"
             ],
-            "time": "2017-11-23 18:22:44"
+            "time": "2018-03-03T17:56:25+00:00"
         },
         {
             "name": "icanboogie/inflector",
@@ -118,20 +117,20 @@
                 "singularize",
                 "underscore"
             ],
-            "time": "2017-06-30 13:16:14"
+            "time": "2017-06-30T13:16:14+00:00"
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.12",
+            "version": "v2.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "258c89a6b97de7dfaf5b8c7607d0478e236b04fb"
+                "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/258c89a6b97de7dfaf5b8c7607d0478e236b04fb",
-                "reference": "258c89a6b97de7dfaf5b8c7607d0478e236b04fb",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/10bcb46e8f3d365170f6de9d05245aa066b81f09",
+                "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09",
                 "shasum": ""
             },
             "require": {
@@ -163,14 +162,15 @@
             "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
             "keywords": [
                 "csprng",
+                "polyfill",
                 "pseudorandom",
                 "random"
             ],
-            "time": "2018-04-04 21:24:14"
+            "time": "2018-06-08T15:26:40+00:00"
         },
         {
             "name": "phacil/common",
-            "version": "dev-development",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phacil/common.git",
@@ -215,25 +215,25 @@
                 "source": "https://github.com/phacil/common/tree/development",
                 "issues": "https://github.com/phacil/common/issues"
             },
-            "time": "2018-04-27 00:39:43"
+            "time": "2018-04-27T00:39:43+00:00"
         },
         {
             "name": "phacil/html",
-            "version": "dev-development",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phacil/html.git",
-                "reference": "840fd33334df84517724a52f8d3bc0562e3ae555"
+                "reference": "35cda36554ef2f3abc566b7033eb2bc31e63ac9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phacil/html/zipball/840fd33334df84517724a52f8d3bc0562e3ae555",
-                "reference": "840fd33334df84517724a52f8d3bc0562e3ae555",
+                "url": "https://api.github.com/repos/phacil/html/zipball/35cda36554ef2f3abc566b7033eb2bc31e63ac9e",
+                "reference": "35cda36554ef2f3abc566b7033eb2bc31e63ac9e",
                 "shasum": ""
             },
             "require": {
                 "icanboogie/inflector": "^1.4",
-                "phacil/common": "dev-development",
+                "phacil/common": "dev-master",
                 "php": ">=5.4"
             },
             "require-dev": {
@@ -265,27 +265,27 @@
                 "php"
             ],
             "support": {
-                "source": "https://github.com/phacil/html/tree/development",
+                "source": "https://github.com/phacil/html/tree/master",
                 "issues": "https://github.com/phacil/html/issues"
             },
-            "time": "2018-04-26 03:18:34"
+            "time": "2018-07-01T02:05:24+00:00"
         },
         {
             "name": "phacil/http",
-            "version": "dev-development",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phacil/http.git",
-                "reference": "368d599506dd65e4bd2fcb78cbcd740980acdfba"
+                "reference": "508f27ec91f277bd36ffbabc0cc2077195a8b0a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phacil/http/zipball/368d599506dd65e4bd2fcb78cbcd740980acdfba",
-                "reference": "368d599506dd65e4bd2fcb78cbcd740980acdfba",
+                "url": "https://api.github.com/repos/phacil/http/zipball/508f27ec91f277bd36ffbabc0cc2077195a8b0a0",
+                "reference": "508f27ec91f277bd36ffbabc0cc2077195a8b0a0",
                 "shasum": ""
             },
             "require": {
-                "phacil/common": "dev-development",
+                "phacil/common": "dev-master",
                 "php": ">=5.4",
                 "symfony/http-foundation": "^3.2"
             },
@@ -321,62 +321,7 @@
                 "source": "https://github.com/phacil/http/tree/development",
                 "issues": "https://github.com/phacil/http/issues"
             },
-            "time": "2018-04-26 03:06:42"
-        },
-        {
-            "name": "phacil/integration",
-            "version": "dev-development",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phacil/integration.git",
-                "reference": "92e62a3ba9d3437e8170ea8d8997713a24fd1b90"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phacil/integration/zipball/92e62a3ba9d3437e8170ea8d8997713a24fd1b90",
-                "reference": "92e62a3ba9d3437e8170ea8d8997713a24fd1b90",
-                "shasum": ""
-            },
-            "require": {
-                "icanboogie/inflector": "^1.4",
-                "phacil/html": "dev-development",
-                "phacil/http": "dev-development",
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.0.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Phacil\\Integration\\": "src/"
-                },
-                "files": [
-                    "src/helpers.inc.php"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alisson Nascimento",
-                    "email": "alisson.sa.nascimento@gmail.com"
-                }
-            ],
-            "description": "Integrtion layer - Phacil PHP Framework",
-            "keywords": [
-                "framework",
-                "integration",
-                "pdo",
-                "phacil",
-                "php"
-            ],
-            "support": {
-                "source": "https://github.com/phacil/integration/tree/development",
-                "issues": "https://github.com/phacil/integration/issues"
-            },
-            "time": "2017-03-22 22:15:48"
+            "time": "2018-07-01T02:04:05+00:00"
         },
         {
             "name": "psr/log",
@@ -423,20 +368,20 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10 12:19:37"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v3.4.8",
+            "version": "v3.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "b11e6d165ff4cbf5685d185ab19a90f2f3bb7d1e"
+                "reference": "1c28679fcbb0d9b35e4fd49fbb74d2ca4ea17bce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/b11e6d165ff4cbf5685d185ab19a90f2f3bb7d1e",
-                "reference": "b11e6d165ff4cbf5685d185ab19a90f2f3bb7d1e",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/1c28679fcbb0d9b35e4fd49fbb74d2ca4ea17bce",
+                "reference": "1c28679fcbb0d9b35e4fd49fbb74d2ca4ea17bce",
                 "shasum": ""
             },
             "require": {
@@ -477,20 +422,20 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-04-03 05:22:50"
+            "time": "2018-06-21T11:10:19+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.7.0",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
+                "reference": "3296adf6a6454a050679cde90f95350ad604b171"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
-                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/3296adf6a6454a050679cde90f95350ad604b171",
+                "reference": "3296adf6a6454a050679cde90f95350ad604b171",
                 "shasum": ""
             },
             "require": {
@@ -502,7 +447,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7-dev"
+                    "dev-master": "1.8-dev"
                 }
             },
             "autoload": {
@@ -536,20 +481,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-01-30 19:27:44"
+            "time": "2018-04-26T10:06:28+00:00"
         },
         {
             "name": "symfony/polyfill-php70",
-            "version": "v1.7.0",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php70.git",
-                "reference": "3532bfcd8f933a7816f3a0a59682fc404776600f"
+                "reference": "77454693d8f10dd23bb24955cffd2d82db1007a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/3532bfcd8f933a7816f3a0a59682fc404776600f",
-                "reference": "3532bfcd8f933a7816f3a0a59682fc404776600f",
+                "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/77454693d8f10dd23bb24955cffd2d82db1007a6",
+                "reference": "77454693d8f10dd23bb24955cffd2d82db1007a6",
                 "shasum": ""
             },
             "require": {
@@ -559,7 +504,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7-dev"
+                    "dev-master": "1.8-dev"
                 }
             },
             "autoload": {
@@ -595,7 +540,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-01-30 19:27:44"
+            "time": "2018-04-26T10:06:28+00:00"
         }
     ],
     "packages-dev": [],
@@ -604,8 +549,7 @@
     "stability-flags": {
         "phacil/common": 20,
         "phacil/html": 20,
-        "phacil/http": 20,
-        "phacil/integration": 20
+        "phacil/http": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
